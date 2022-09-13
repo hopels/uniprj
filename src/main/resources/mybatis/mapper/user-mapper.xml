@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.project.user.mapper.UserMapper">
+	<select id="userList" resultType="com.web.project.user.vo.User">
+		SELECT * FROM tb_user
+	</select>
+	<insert id="regUser" parameterType="com.web.project.user.vo.User">
+		INSERT INTO TB_user(id, pw, nickname, email, joindate, auth) VALUES(
+			#{id},#{pw},#{nickname},#{email},NOW(),'user'
+		)
+	</insert>
+</mapper>
+
+

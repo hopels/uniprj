@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.project.user.mapper.LoginMapper">
+	<select id="idCheck" resultType="string" parameterType="com.web.project.user.vo.User">
+		SELECT EXISTS(
+			SELECT id
+			FROM TB_user
+			WHERE id=#{id} LIMIT 1
+		) AS success
+	</select>
+	<select id="loginCheck" resultType="string" parameterType="com.web.project.user.vo.User">
+		SELECT EXISTS(
+			SELECT id, pw 
+			FROM tb_user 
+			WHERE id=#{id} 
+			AND pw=#{pw} LIMIT 1
+		) AS success
+	</select>
+	<select id="getUserInfo_Id" resultType="com.web.project.user.vo.User" parameterType="string">
+		SELECT *
+		FROM tb_user
+		WHERE id=#{id}
+	</select>
+</mapper>
+
+

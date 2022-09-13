@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.project.board.mapper.BoardMapper">
+	<select id="getBoardList" resultType="com.web.project.board.vo.Board" parameterType="com.web.project.board.vo.BoardSch">
+		SELECT b.*, u.nickname
+		FROM tb_board b
+		left JOIN tb_user u ON b.userno=u.userno
+		<if test="title != null">
+		WHERE title LIKE CONCAT_WS(IFNULL(NULL,#{title}), '%', '%')
+		</if>
+		ORDER BY boardno DESC
+		LIMIT #{start}, #{pageSize}
+	</select>
+	<select id="getBlistCount" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_board
+	</select>
+	<select id="insBoard" parameterType="com.web.project.board.vo.Board">
+		INSERT INTO tb_board(userno, title, content, regdate, uptdate, fname, fpath, readcnt)
+		VALUES(
+			#{userno}, #{title}, #{content}, NOW(), NOW(), #{fname}, NULL, 0
+		)
+	</select>
+	<select id="boardDetail" resultType="com.web.project.board.vo.Board" parameterType="int">
+		SELECT b.*, u.nickname
+		FROM tb_board b
+		LEFT JOIN tb_user u ON b.userno=u.userno
+		WHERE boardno=#{boardno}
+	</select>
+	<update id="upReadCnt">
+		UPDATE tb_board
+		SET readcnt = readcnt+1
+		WHERE boardno = #{boardno}
+	</update>
+	<update id="uptBoard" parameterType="com.web.project.board.vo.Board">
+		UPDATE tb_board
+		SET title=#{title},
+			content=#{content},
+			uptdate=NOW()
+		WHERE boardno = #{boardno}
+	</update>
+	<delete id="delBoard" parameterType="int">
+		DELETE FROM tb_board
+		WHERE boardno = #{boardno}
+	</delete>
+	<select id="getCommentList" resultType="com.web.project.board.vo.Comment" parameterType="com.web.project.board.vo.CommentSch">
+		SELECT c.*, u.nickname, u.id
+		FROM tb_comment c
+		left JOIN tb_user u ON c.userno=u.userno
+		<if test="boardno != null">
+		WHERE c.boardno = #{boardno}
+		</if>
+		ORDER BY commentno DESC
+		LIMIT #{start}, #{pageSize}
+	</select>
+	<select id="getCommentCount" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM tb_comment
+		WHERE boardno = #{boardno}
+	</select>
+	<insert id="insComment" parameterType="com.web.project.board.vo.Comment">
+		INSERT INTO tb_comment(boardno, userno, content, regdate, uptdate)
+		VALUES(#{boardno},#{userno},#{content},NOW(),NOW())
+	</insert>
+	<update id="uptComment" parameterType="com.web.project.board.vo.Comment">
+		UPDATE tb_comment
+		SET content = #{content},
+			uptdate = NOW()
+		WHERE commentno = #{commentno}
+	</update>
+	<delete id="delComment" parameterType="int">
+		DELETE FROM tb_comment
+		WHERE commentno = #{commentno}
+	</delete>
+	<delete id="delComment_delB" parameterType="int">
+		DELETE FROM tb_comment
+		WHERE boardno = #{boardno}
+	</delete>
+</mapper>
+
+

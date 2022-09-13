@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.project.notice.mapper.NoticeMapper">
+	<select id="getNoticePageCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_notice
+	</select>
+	<select id="getNoticeList" resultType="com.web.project.notice.vo.Notice" parameterType="com.web.project.notice.vo.NoticeSch">
+		SELECT n.*, u.nickname
+		FROM tb_notice n
+		join tb_user u ON n.userno=u.userno
+		<if test="title != null"> 
+		AND title LIKE CONCAT_WS(IFNULL(NULL,#{title}), '%', '%')
+		</if>
+		ORDER BY noticeno DESC
+		LIMIT #{start},#{pageSize}
+	</select>
+	<select id="getNoticeDetail" resultType="com.web.project.notice.vo.Notice" parameterType="int">
+		SELECT n.*, u.nickname
+		FROM tb_notice n
+		LEFT JOIN tb_user u ON n.userno=u.userno
+		WHERE noticeno=#{noticeno}
+	</select>
+	<select id="getUserno_id" resultType="int" parameterType="string">
+		SELECT userno
+		FROM tb_user
+		WHERE id=#{id}
+	</select>
+	<insert id="insNotice" parameterType="com.web.project.notice.vo.Notice">
+		INSERT INTO tb_notice(userno, title, content, regdate, uptdate) VALUES(
+			#{userno}, #{title},#{content},NOW(),NOW()
+		)
+	</insert>
+	<update id="uptNotice" parameterType="com.web.project.notice.vo.Notice">
+		UPDATE tb_notice
+		SET userno=#{userno},
+			title=#{title},
+			content=#{content},
+			uptdate=NOW()
+		WHERE noticeno = #{noticeno}
+	</update>
+	<delete id="delNotice" parameterType="int">
+		DELETE FROM tb_notice
+		WHERE noticeno=#{noticeno}
+	</delete>
+</mapper>
+
+

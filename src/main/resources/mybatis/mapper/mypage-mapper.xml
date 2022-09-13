@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.project.mypage.mapper.MyPageMapper">
+	<select id="getDevPartInfo" resultType="com.web.project.mypage.vo.Developer" parameterType="string">
+		SELECT u.id, d.*
+		FROM tb_developer d
+		LEFT JOIN tb_user u ON d.userno=u.userno
+		WHERE u.id=#{id}
+	</select>
+	<select id="checkDevPart" resultType="string" parameterType="string">
+		SELECT EXISTS(
+			SELECT *
+			FROM tb_developer d
+			LEFT JOIN tb_user u ON d.userno=u.userno
+			WHERE u.id =#{id} LIMIT 1
+		) AS exts;
+	</select>
+	<update id="uptDevPart" parameterType="com.web.project.mypage.vo.Developer">
+		UPDATE tb_developer
+		SET jobtype=#{jobtype}
+		WHERE userno=(
+			SELECT userno
+			FROM tb_user
+			WHERE id=#{id}
+		)
+	</update>
+	<insert id="insDevPart" parameterType="com.web.project.mypage.vo.Developer">
+		INSERT INTO tb_developer VALUES(
+			#{userno}, #{jobtype}
+		)
+	</insert>
+	<update id="uptUserDetail" parameterType="com.web.project.user.vo.User">
+		UPDATE tb_user
+		SET nickname=#{nickname},
+			email=#{email}
+		WHERE id=#{id}
+	</update>
+	<update id="uptUserPw" parameterType="com.web.project.user.vo.User">
+		UPDATE tb_user
+		SET pw=#{pw}
+		WHERE id=#{id}
+	</update>
+	<select id="writeB_cnt" resultType="int" parameterType="int">
+		SELECT n.ncnt+b.bcnt wbcnt
+			FROM
+				(SELECT COUNT(*) ncnt FROM tb_notice WHERE userno=#{userno}) n,
+				(SELECT COUNT(*) bcnt FROM tb_board WHERE userno=#{userno}) b
+	</select>
+	<select id="writeC_cnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) wccnt
+		FROM tb_comment
+		WHERE userno=#{userno}
+	</select>
+</mapper>
+
+
