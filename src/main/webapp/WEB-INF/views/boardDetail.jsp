@@ -182,10 +182,14 @@
 			success:function(data){
 				addHtml = "";
 				$(data).each(function(idx,cmt){
+					var regdate = cmt.regdate.substr(0,10)
+					var uptdate = cmt.uptdate.substr(0,10)
 					addHtml += "<div class='card'><div class='card-header'><div class='comment-div'><div class='comment-header-left'>"
-								+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>"+cmt.nickname+"</h5><small> ("+cmt.id+") </small></div>"
+								+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>"+cmt.nickname+"</h5><small> ("+cmt.id+") </small>"
 					if(cmt.regdate!=cmt.uptdate){
-						addHtml += "(수정됨)"
+						addHtml += "<small>- "+uptdate+" </small><samll> (수정됨) </small></div>"
+					}else{
+						addHtml += "<small>- "+regdate+" </small></div>"
 					}
 					if("${userAuth_session}"=='user'){
 						if("${userId_session}"==cmt.id){

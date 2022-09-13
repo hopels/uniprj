@@ -33,12 +33,10 @@ public class MyPageFileUploadController {
 		Map<String, String> map = new HashMap<String, String>();
 		String usernoS = String.valueOf(userno);
 		map.put("userno", usernoS);
-		System.out.println(usernoS);
 		if(file.getSize()>0) {
 			String originalFileName = file.getOriginalFilename();
 			String ext = FilenameUtils.getExtension(originalFileName);
 			String newInfImgFileName = "img_"+UUID.randomUUID() + "." + ext;
-			System.out.println(newInfImgFileName);
 			File f = new File(path + newInfImgFileName);
 			file.transferTo(f);
 			map.put("pfimg", newInfImgFileName);
