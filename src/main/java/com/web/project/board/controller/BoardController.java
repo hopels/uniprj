@@ -89,5 +89,5 @@ public class BoardController {
 		d.addAttribute("proc", "del");
 		return "boardDetail";
 	}
-	
+	// git commit 테스트
 }
