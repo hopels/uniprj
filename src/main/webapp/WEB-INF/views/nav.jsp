@@ -27,7 +27,14 @@
         <li class="nav-item dropdown pe-3">
 		<c:if test="${userId_session != null}">
 			<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="${path}/resources/NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
+            <c:choose>
+				<c:when test="${not empty userPf_session}">
+					<img src="${path}/resources/common/img/profile/${userPf_session}" alt="profile" class="rounded-circle"/>
+				</c:when>
+				<c:when test="${empty userPf_session}">
+					<img src="${path}/resources/NiceAdmin/assets/img/profile/default.png" alt="profile" class="rounded-circle"/>
+				</c:when>
+			</c:choose>
             <span class="d-none d-md-block dropdown-toggle ps-2">${userId_session}</span>
           	</a><!-- End Profile Iamge Icon -->
 

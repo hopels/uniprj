@@ -27,6 +27,7 @@ public class LoginController {
 		if(service.loginCheck(inp).equals("pass")) {
 			session.setAttribute("userId_session", service.getUserInfo_Id(inp.getId()).getId());
 			session.setAttribute("userAuth_session", service.getUserInfo_Id(inp.getId()).getAuth());
+			session.setAttribute("userPf_session", service.getUserInfo_Id(inp.getId()).getPfimg());
 		}
 		
 		return "login";

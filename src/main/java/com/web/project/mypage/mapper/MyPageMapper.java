@@ -1,5 +1,7 @@
 package com.web.project.mypage.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.web.project.mypage.vo.Developer;
@@ -23,4 +25,6 @@ public interface MyPageMapper {
 	public int writeB_cnt(int userno);
 	// 내가 쓴 댓글 수 조회
 	public int writeC_cnt(int userno);
+	// 프로필사진 수정
+	public void uptPfimg(Map<String, String> map);
 }

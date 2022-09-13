@@ -10,6 +10,7 @@ public class User {
 	private String email;
 	private Date joindate;
 	private String auth;
+	private String pfimg;
 	public User() {
 		
 	}
@@ -22,6 +23,13 @@ public class User {
 		this.email = email;
 		this.joindate = joindate;
 		this.auth = auth;
+	}
+	
+	public String getPfimg() {
+		return pfimg;
+	}
+	public void setPfimg(String pfimg) {
+		this.pfimg = pfimg;
 	}
 	public String getUserno() {
 		return userno;

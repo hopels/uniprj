@@ -61,6 +61,13 @@
 		text-align:center;
 		padding-top:130px;
 	}
+	#profile-change-link{
+		cursor:pointer;
+		font-weight:bold;
+	}
+	#profile-change-link:hover{
+		color:blue;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -146,8 +153,6 @@
 			}			
 			$("#pw-upt-form").attr("action","uptUserPw.do").submit()
 		})
-		<%-- pw-upt-form / curPassword / inputPassword / rePassword / pw-upt-btn --%>
-		<%-- input-pw-valid-text / input-repw-valid-text / pw-valid-result --%>
 		$("#inputPassword").keyup(function(){
 			var inputPw = $("#inputPassword").val()
 			$("#input-repw-valid-text").text("")
@@ -172,6 +177,12 @@
 				}
 			}
 			
+		})
+		$("#profile-change-link").click(function(){
+			$("[name=report]").click()
+		})
+		$("[name=report]").change(function(){
+			$("#profile-form").attr("action","mypageFileUpload.do").submit()
 		})
 	});
 	
@@ -273,8 +284,19 @@
 			<div class="col-xl-3">
 				<div class="card">
 					<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-						<h5 class="card-title">프로필</h5>
-						<img src="${path}/resources/NiceAdmin/assets/img/profile/default.png" alt="profile" class="rounded-circle"/>
+						<h5 class="card-title" id="profile-change-link">프로필</h5>
+						<form id="profile-form" enctype="multipart/form-data" method="post">
+							<input type="hidden" name="userno" value="${user_Info.userno}"/>
+							<input type="file" name="report" style="display:none"/>
+						</form>
+						<c:choose>
+							<c:when test="${not empty user_Info.pfimg}">
+								<img src="${path}/resources/common/img/profile/${user_Info.pfimg}" alt="profile" class="rounded-circle"/>
+							</c:when>
+							<c:when test="${empty user_Info.pfimg}">
+								<img src="${path}/resources/NiceAdmin/assets/img/profile/default.png" alt="profile" class="rounded-circle"/>
+							</c:when>
+						</c:choose>
 						<h3 id="profile-nickname">${user_Info.nickname}</h3>
 						<h6 id="dev_info"></h6>
 						<form id="dev_frm" method="post">

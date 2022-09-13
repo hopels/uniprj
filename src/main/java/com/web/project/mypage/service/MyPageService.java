@@ -1,5 +1,7 @@
 package com.web.project.mypage.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,9 @@ public class MyPageService {
 	
 	public int writeC_cnt(int userno) {
 		return mapper.writeC_cnt(userno);
+	}
+	
+	public void uptPfimg(Map<String, String> map) {
+		mapper.uptPfimg(map);
 	}
 }

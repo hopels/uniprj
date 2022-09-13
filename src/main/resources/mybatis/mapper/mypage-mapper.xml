@@ -53,6 +53,11 @@
 		FROM tb_comment
 		WHERE userno=#{userno}
 	</select>
+	<update id="uptPfimg" parameterType="HashMap">
+		UPDATE tb_user
+		SET pfimg = #{pfimg}
+		WHERE userno = #{userno}
+	</update>
 </mapper>
 
 

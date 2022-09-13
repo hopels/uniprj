@@ -29,7 +29,7 @@ public class BoardFileController {
 		ModelAndView mv = new ModelAndView("jsonView");
 		
 		List<MultipartFile> fileList = request.getFiles("upload"); 
-		String imgPath = null;
+		String imgPath = null; 
 		for (MultipartFile mf : fileList) {
 			if(fileList.get(0).getSize()>0) {
 				String originFileName = mf.getOriginalFilename(); //원본 파일 명
