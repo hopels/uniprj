@@ -35,7 +35,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		$("#notice-tab").click(function(){
+			location.href="noticePage.do"
+		})
+		$("#board-tab").click(function(){
+			location.href="boardList.do"
+		})
 	});
 	
 function goNoticeDetail(noticeno){
@@ -76,7 +81,7 @@ function goBoardDetail(boardno){
 					<div class="card-body">	
 						<ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
 							<li class="nav-item flex-fill" role="presentation">
-								<button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true" style="cursor:default"><span class="main_title">공지사항</span></button>
+								<button class="nav-link w-100 active" id="notice-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true" style="cursor:default"><span class="main_title">공지사항</span></button>
 							</li>
 						</ul>
 						<table class="table table-hover">
@@ -108,7 +113,7 @@ function goBoardDetail(boardno){
 					<div class="card-body">	
 						<ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
 							<li class="nav-item flex-fill" role="presentation">
-								<button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true" style="cursor:default"><span class="main_title">자유게시판</span></button>
+								<button class="nav-link w-100 active" id="board-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true" style="cursor:default"><span class="main_title">자유게시판</span></button>
 							</li>
 						</ul>
 						<table class="table table-hover">

@@ -314,7 +314,7 @@
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">개인정보</h5><hr>
+						<h5 class="card-title" style="font-weight:bold;">개인정보</h5><hr>
 
 						<div class="row user-detail-info">
 							<div class="col-lg-3 col-md-4 label-info ">닉네임</div>
@@ -420,7 +420,7 @@
 			<div class="col-lg-3">
 				<div class="card">
 					<div class="card-header">
-						<h5 class="card-title">활동내역</h5>
+						<h5 class="card-title" style="font-weight:bold;">활동내역</h5>
 						
 						
 						
