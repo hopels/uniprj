@@ -176,6 +176,7 @@ function goDetail(boardno){
 			</div>
 		</div>
 	</div>
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </main>
 <!-- Vendor JS Files -->
 <script src="${path}/resources/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
