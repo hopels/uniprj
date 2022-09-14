@@ -184,6 +184,9 @@
 		$("[name=report]").change(function(){
 			$("#profile-form").attr("action","mypageFileUpload.do").submit()
 		})
+		$("#adminPage-btn").click(function(){
+			location.href="adminPage.do"
+		})
 	});
 	
 	if("${userId_session}"==""){
@@ -441,8 +444,14 @@
 							</div>
 						</div>
 					</div>
+					<c:if test="${userAuth_session == 'admin'}">
+						<div class="card-footer" style="text-align:center">
+							<button type="button" id="adminPage-btn" class="btn btn-outline-primary">관리자 페이지</button>
+						</div>
+					</c:if>
 				</div>
 			</div>
+			
 		</div>
 	</section>
 </main>

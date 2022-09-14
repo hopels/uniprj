@@ -64,6 +64,7 @@ public class BoardService {
 	}
 	
 	public void delBoard(int boardno) {
+		mapper.delBoardFile(boardno);
 		mapper.delComment_delB(boardno);
 		mapper.delBoard(boardno);
 	}

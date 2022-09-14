@@ -92,6 +92,10 @@
 		FROM tb_board_file
 		WHERE boardno=#{boardno}
 	</select>
+	<delete id="delBoardFile" parameterType="int">
+		DELETE FROM tb_board_file
+		WHERE boardno = #{boardno}
+	</delete>
 </mapper>
 
 

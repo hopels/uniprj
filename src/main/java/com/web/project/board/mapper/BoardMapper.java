@@ -43,4 +43,6 @@ public interface BoardMapper {
 	public String getBoardno_after_ins(Board sch);
 	// 게시글 파일 조회
 	public List<BoardFile> getBoardFileList(int boardno);
+	// 게시글 첨부파일 삭제
+	public void delBoardFile(int boardno);
 }
