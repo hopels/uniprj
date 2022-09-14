@@ -78,6 +78,20 @@
 		DELETE FROM tb_comment
 		WHERE boardno = #{boardno}
 	</delete>
+	<insert id="insBoardFile" parameterType="com.web.project.board.vo.BoardFile">
+		INSERT INTO tb_board_file(boardno, originfname, fname)
+		VALUES( #{boardno}, #{originfname}, #{fname})
+	</insert>
+	<select id="getBoardno_after_ins" resultType="string" parameterType="com.web.project.board.vo.Board">
+		SELECT boardno
+		FROM tb_board
+		WHERE userno=#{userno} AND title=#{title}
+	</select>
+	<select id="getBoardFileList" resultType="com.web.project.board.vo.BoardFile" parameterType="int">
+		SELECT * 
+		FROM tb_board_file
+		WHERE boardno=#{boardno}
+	</select>
 </mapper>
 
 

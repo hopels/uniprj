@@ -50,7 +50,7 @@
 				return
 			}
 			$("[name=content]").val(editor.getData())
-			$("#insBoard_form").attr("action","insBoard.do").submit()
+			$("#insBoard_form").attr("action","boardFileUpload.do").submit()
 		})
 	});
 	if("${proc}"=="ins"){
@@ -94,6 +94,14 @@
 							<input id="input_title" class="form-control" name="title"/>
 						</div>
 					</div>
+					
+					<div class="row mb-3">
+						<label for="input_title" class="col-sm-1 col-form-label">첨부파일</label>
+						<div class="col-sm-5">
+							<input multiple="multiple" type="file" id="input_file" class="form-control" name="report"/>
+						</div>
+					</div>
+					
 					<div class="col-md12 mt-4" style="height:770px;">
 						<label for="editor" class="form-label">내용</label>
 						<textarea id="editor" rows="500" cols="500"></textarea>

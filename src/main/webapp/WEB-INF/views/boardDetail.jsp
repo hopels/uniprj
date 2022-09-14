@@ -61,6 +61,14 @@
 		padding:10px;
 		text-align:center;
 	}
+	.file-link-area{
+		padding-top:10px;
+	}
+	.bi-file-earmark-check{
+		margin-right:5px;
+		font-weight:bold;
+		font-size: 20px;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -285,6 +293,18 @@
 			<div class="card-body">
 				<span style="display:block;padding-top:20px;padding-left:20px;padding-right:20px;">${boardDetail.content}</span>
 			</div>
+			
+			<div class="alert alert-light border-light alert-dismissible fade show">
+				<h4 class="alert-heading">첨부파일</h4>
+				<small>&nbsp;&nbsp;&nbsp;첨부된 파일로 발생하는 문제 또는 오류에 대해서는 책임지지 않습니다.</small>
+					<hr>
+				<c:forEach var="file" items="${fileList}">
+				<div class="file-link-area">
+					<i class="bi bi-file-earmark-check"></i><a href="fileDownload.do?fname=${file.fname}&originfname=${file.originfname}">${file.originfname}</a>
+				</div>
+				</c:forEach>
+			</div>
+			
 			<div class="card-footer">
 				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">

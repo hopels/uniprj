@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.project.board.service.BoardFileService;
 import com.web.project.board.service.BoardService;
 import com.web.project.board.vo.Board;
 import com.web.project.board.vo.BoardSch;
@@ -20,6 +21,9 @@ public class BoardController {
 	
 	@Autowired(required=false)
 	private NoticeService nService;
+	
+	@Autowired(required=false)
+	private BoardFileService fileService;
 	
 	// http://localhost:5080/boardList.do
 	@RequestMapping("boardList.do")
@@ -49,6 +53,7 @@ public class BoardController {
 	public String boardDetail(HttpSession session,@RequestParam(value = "boardno", defaultValue = "0") int boardno, Model d) {
 		if(session != null && session.getAttribute("userId_session") != null) {
 			d.addAttribute("userno", nService.getUserno_id((String)session.getAttribute("userId_session")));
+			d.addAttribute("fileList", fileService.getBoardFileList(boardno));
 		}
 		if(boardno == 0) {
 			d.addAttribute("proc", "err");
