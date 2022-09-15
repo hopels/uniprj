@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.project.admin.mapper.AdminMapper">
+	<select id="getAuthCount" resultType="com.web.project.admin.vo.AuthCount">
+		SELECT a.acnt, m.mcnt, u.ucnt
+		FROM 
+			(SELECT COUNT(*) acnt FROM tb_user WHERE auth='admin') a,
+			(SELECT COUNT(*) mcnt FROM tb_user WHERE auth='manager') m,
+			(SELECT COUNT(*) ucnt FROM tb_user WHERE auth='user') u
+	</select>
+	<update id="uptAuth" parameterType="com.web.project.user.vo.User">
+		UPDATE tb_user
+			SET auth = #{auth}
+			WHERE userno = #{userno}
+	</update>
+</mapper>
+
+

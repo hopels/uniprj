@@ -26,20 +26,34 @@
 		font-size:30px;
 		font-weight:bold;
 	}
+	.list-tr:hover{
+		background-color:rgb(239,239,239);
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
 	if("${userAuth_session}"!="admin" || "${userAuth_session}"==""){
 		alert("접근 권한이 없습니다.")
 		location.href="MainPage.do"
 	}
+	function hoverUser(userno){
+		$("[name=userno]").val(userno)
+	}
+	const change = (target) => {
+		$("[name=auth]").val(target.value)
+		if(confirm("권한을 변경하시겠습니까?")){
+			$("#auth-change-frm").attr("action","uptAuth.do").submit()
+		}
+	}
+	if("${proc}"=="uptAuth"){
+		alert("권한이 변경되었습니다.")
+		location.href="adminPage.do"
+	}
 </script>
+
 </head>
 <body>
 <jsp:include page="nav.jsp"/>
@@ -91,12 +105,19 @@
 							</thead>
 							<tbody>
 								<c:forEach var="user" items="${userList}">
-									<tr>
+									<tr class="list-tr" onmouseover="hoverUser(${user.userno})">
 										<td>${user.userno}</td>
 										<td>${user.id}</td>
 										<td>${user.nickname}</td>
 										<td><fmt:formatDate value="${user.joindate}" pattern="yyyy-MM-dd"/></td>
-										<td>${user.auth}</td>
+										<td>
+											<select class="auth-select" onchange="change(this)">
+												<option value="" selected disabled>${user.auth}</option>
+												<option value="user">user</option>
+												<option value="manager">manager</option>
+												<option value="admin">admin</option>
+											</select> 
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -106,12 +127,37 @@
 			</div>
 			<div class="col-lg-3">
 				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title" style="font-weight:bold;">권한 관리</h5>
+					</div>
 					<div class="card-body">
-						<h5 class="card-title" style="font-weight:bold;">권한관리</h5>
-
+						<div class="row" style="margin-top:30px;">
+							<div class="col-lg-6 col-md-6 label " style="color:rgb(119, 133, 169)">
+								admin
+							</div>
+							<div class="col-lg-6 col-md-6" style="color:black;margin-bottom:10px">
+								${authCnt.acnt} 명
+							</div>
+							<div class="col-lg-6 col-md-6 label " style="color:rgb(119, 133, 169)">
+								manager
+							</div>
+							<div class="col-lg-6 col-md-6" style="color:black;margin-bottom:10px">
+								${authCnt.mcnt} 명
+							</div>
+							<div class="col-lg-6 col-md-6 label " style="color:rgb(119, 133, 169)">
+								user
+							</div>
+							<div class="col-lg-6 col-md-6" style="color:black;">
+								${authCnt.ucnt} 명
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<form id="auth-change-frm" method="post">
+				<input type="hidden" name="userno" value=""/>
+				<input type="hidden" name="auth" value=""/>
+			</form>
 			
 			
 			

@@ -40,9 +40,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		noticeListajax()
-		$("#mainPageBtn").click(function(){
-			location.href="MainPage.do"
-		})
 		$("#notice_schBtn").click(function(){
 			noticeListajax()
 		})

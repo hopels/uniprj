@@ -4,7 +4,14 @@ ClassicEditor
 		mediaEmbed: {
       		previewsInData: true
     	},
-    	toolbar:['heading', '|', 'undo','redo','|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'ckfinder', 'mediaEmbed','uploadImage'],
+    	toolbar:{
+			items:[
+				'heading', '|', 
+				'undo','redo','|', 
+				'imageStyle:alignLeft','imageStyle:alignCenter','imageStyle:alignRight','|', 
+				'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'ckfinder', 'mediaEmbed','uploadImage'],
+			shouldNotGroupWhenFull:true
+			},
     	ckfinder:{
 			uploadUrl:'http://localhost:5080/boardFileUpload.do?',
 			options:{

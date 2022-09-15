@@ -8,5 +8,6 @@
 		<mapper resource="mybatis/mapper/notice-mapper.xml"/>
 		<mapper resource="mybatis/mapper/mypage-mapper.xml"/>
 		<mapper resource="mybatis/mapper/board-mapper.xml"/>
+		<mapper resource="mybatis/mapper/admin-mapper.xml"/>
 	</mappers>
 </configuration>

@@ -35,10 +35,6 @@ public class BoardFileController {
 	@Value("C:/a01_javaexp/stsworkspace/uniprj2/src/main/resources/static/common/img/board/") 
 	private String saveUrl;
 	
-	@Value("http://localhost:5080/resources/common/img/board/")
-	private String loadUrl;
-
-	
 	@RequestMapping("boardFileUpload.do")
 	public String Model(@RequestParam Map<String, Object> map, MultipartHttpServletRequest report, Board ins, Model d) throws Exception{
 		service.insBoard(ins);
