@@ -68,6 +68,10 @@
 	#profile-change-link:hover{
 		color:blue;
 	}
+	.mypage-img{
+		width:120px;
+		height:120px;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -294,10 +298,10 @@
 						</form>
 						<c:choose>
 							<c:when test="${not empty user_Info.pfimg}">
-								<img src="${path}/resources/common/img/profile/${user_Info.pfimg}" alt="profile" class="rounded-circle"/>
+								<img src="${path}/resources/common/img/profile/${user_Info.pfimg}" alt="profile" class="rounded-circle mypage-img"/>
 							</c:when>
 							<c:when test="${empty user_Info.pfimg}">
-								<img src="${path}/resources/NiceAdmin/assets/img/profile/default.png" alt="profile" class="rounded-circle"/>
+								<img src="${path}/resources/NiceAdmin/assets/img/profile/default.png" alt="profile" class="rounded-circle mypage-img"/>
 							</c:when>
 						</c:choose>
 						<h3 id="profile-nickname">${user_Info.nickname}</h3>
