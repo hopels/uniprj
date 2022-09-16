@@ -62,6 +62,10 @@
 		alert("공지사항이 수정되었습니다.")
 		location.href="noticePage.do";
 	}
+	if("${proc}"=="err"){
+		alert("잘못된 요청입니다.")
+		location.href="mainPage.do";
+	}
 </script>
 </head>
 <body>

@@ -65,17 +65,25 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("uptNotice.do")
-	public String uptNotice(Notice upt, Model d) {
-		service.uptNotice(upt);
-		d.addAttribute("proc", "upt");
+	public String uptNotice(Notice upt, Model d, HttpSession session) {
+		if(session!=null && !((String)session.getAttribute("userAuth_session")).equals("user")) {
+			service.uptNotice(upt);
+			d.addAttribute("proc", "upt");
+		}else {
+			d.addAttribute("proc", "err");
+		}
 		return "uptNotice";
 	}
 	
 	@RequestMapping("delNotice.do")
-	public String delNotice(@RequestParam(value = "noticeno", defaultValue = "0") int noticeno, Model d) {
-		if(noticeno!=0) {
-			service.delNotice(noticeno);
-			d.addAttribute("proc", "del");
+	public String delNotice(@RequestParam(value = "noticeno", defaultValue = "0") int noticeno, Model d, HttpSession session) {
+		if(session != null && !((String)session.getAttribute("userAuth_session")).equals("user")) {
+			if(noticeno!=0) {
+				service.delNotice(noticeno);
+				d.addAttribute("proc", "del");
+			}else {
+				d.addAttribute("proc", "err");
+			}
 		}else {
 			d.addAttribute("proc", "err");
 		}

@@ -42,7 +42,7 @@ public class BoardFileController {
 		List<MultipartFile> fileList = report.getFiles("report");
 		for (MultipartFile mf : fileList) {
 			if(fileList.get(0).getSize()>0) {
-				String originFileName = mf.getOriginalFilename(); //원본 파일 명
+				String originFileName = mf.getOriginalFilename();
 				System.out.println("originFileName=="+originFileName);
 				String ext = FilenameUtils.getExtension(originFileName);
 				String newInfImgFileName = "img_"+UUID.randomUUID() + "." + ext;
