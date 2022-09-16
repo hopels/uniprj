@@ -1,0 +1,53 @@
+# 소스리뷰
+
+기초 환경설정
+	spring starter project
+		maven .. gradle .. 결정
+		자바 버전
+		jar, war .. 두 방법은 배포 방식이 다름
+		- Dependencies
+			DevTools , Mybatis, MySQL ..  필요한
+
+스프링 부트 최초 실행
+	@SpringBootApplication
+	@MapperScan(basePackages = " ... ") -> ...을 기본 경로로 설정
+
+세팅
+	application.properties ( .yml -> 취향차이 )
+		mybatis.mapper-locations > mapper의 경로를 지정 ( ex : mapper-xml/**/*.xml )
+	
+	domain = Vo  ( 명칭만 다르고 같은 개념 )
+	
+	로그인에서 로그인 성공 시 model, session 둘다 값을 담음
+	
+	jsp
+		c:url
+			<c:url var="companyDetail" value="/companyDetail">
+				<c:param name="cm_no" value="${item.cm_no}"/>
+				<c:param name="rv_no" value="${item.rv_no}"/>
+			</c:url>
+	
+	mapper
+		resultmap에 두개 이상 들어가는것이 가능
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

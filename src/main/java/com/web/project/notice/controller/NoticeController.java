@@ -1,5 +1,6 @@
 package com.web.project.notice.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class NoticeController {
 		if(noticeno!=0) {
 			d.addAttribute("noticeDetail", service.getNoticeDetail(noticeno));
 		}else {
-			return "notice";
+			return "redirect:/noticePage.do";
 		}
 		return "noticeDetail";
 	}
@@ -76,17 +77,22 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("delNotice.do")
-	public String delNotice(@RequestParam(value = "noticeno", defaultValue = "0") int noticeno, Model d, HttpSession session) {
-		if(session != null && !((String)session.getAttribute("userAuth_session")).equals("user")) {
-			if(noticeno!=0) {
-				service.delNotice(noticeno);
-				d.addAttribute("proc", "del");
+	public String delNotice(@RequestParam(value = "noticeno", defaultValue = "0") int noticeno, Model d, HttpSession session, HttpServletRequest request) {
+		if(request.isRequestedSessionIdValid()) {
+			if(session != null && !((String)session.getAttribute("userAuth_session")).equals("user")) {
+				if(noticeno!=0) {
+					service.delNotice(noticeno);
+					d.addAttribute("proc", "del");
+				}else {
+					d.addAttribute("proc", "err");
+				}
 			}else {
 				d.addAttribute("proc", "err");
 			}
 		}else {
 			d.addAttribute("proc", "err");
 		}
+		
 		return "noticeDetail";
 	}
 }

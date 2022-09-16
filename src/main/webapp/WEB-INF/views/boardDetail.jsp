@@ -344,14 +344,8 @@
 					</div>
 				</div>
 			</div>
-			
-
-			
 		</div>
-		
 	</div>
-	
-	
 	<div id="boardDetail_btnArea">
 		<button id="board_uptbtn" class="btn btn-outline-primary" type="button">수정</button>
 		<button id="board_delbtn" class="btn btn-outline-danger" type="button">삭제</button>

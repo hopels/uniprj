@@ -162,7 +162,7 @@
 						<div class="card mb-3">
 							<div class="card-body">
 								<div class="pt-4 pb-2">
-									<h5 class="card-title text-center pb-0 fs-4">회원가입</h5>
+									<h5 class="card-title text-center pb-0 fs-4" style="font-weight:bold;">회원가입</h5>
 									<p class="text-center small">회원정보를 입력하세요</p>
 								</div>
 								<form id="join_frm" class="row g-3 needs-validation"  method="post" novalidate>
