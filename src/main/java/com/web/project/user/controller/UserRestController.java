@@ -28,7 +28,7 @@ public class UserRestController {
 	@RequestMapping("idValidCheck.do")
 	public Map<String, String> idValidCheck(User inp){
 		Map<String, String> rslt = new LinkedHashMap<>();
-		rslt.put("valid", service2.loginCheck(inp));
+		rslt.put("valid", service2.loginCheck2(inp));
 		return rslt;
 	}
 	

@@ -12,10 +12,27 @@ public class LoginService {
 	@Autowired(required=false)
 	private LoginMapper mapper;
 	// 로그인 처리 (아이디 존재, 아이디+비밀번호 일치 확인)
+	/*
 	public String loginCheck(User inp) {
 		String flag = "";
 		if(mapper.idCheck(inp).equals("1")) {
 			if(mapper.loginCheck(inp).equals("1")) {
+				flag="pass";
+			}else {
+				flag="nonPw";
+			}
+		}else {
+			flag="nonId";
+		}
+		
+		return flag;
+	}
+	*/
+	
+	public String loginCheck2(User inp) {
+		String flag = "";
+		if(mapper.idCheck(inp).equals("1")) {
+			if(mapper.getUserInfo_Id(inp.getId()).getPw().equals(inp.getPw())) {
 				flag="pass";
 			}else {
 				flag="nonPw";

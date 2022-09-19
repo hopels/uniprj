@@ -23,8 +23,8 @@ public class LoginController {
 	
 	@RequestMapping("loginCheck.do")
 	public String loginCheck(HttpSession session, User inp, Model d) {
-		d.addAttribute("proc", service.loginCheck(inp));
-		if(service.loginCheck(inp).equals("pass")) {
+		d.addAttribute("proc", service.loginCheck2(inp));
+		if(service.loginCheck2(inp).equals("pass")) {
 			session.setAttribute("userId_session", service.getUserInfo_Id(inp.getId()).getId());
 			session.setAttribute("userAuth_session", service.getUserInfo_Id(inp.getId()).getAuth());
 			session.setAttribute("userPf_session", service.getUserInfo_Id(inp.getId()).getPfimg());

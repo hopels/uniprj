@@ -153,7 +153,7 @@
 							<option value="30">30</option>
 						</select>
 				    </div>
-				    <c:if test="${userAuth_session != 'user'}">
+				    <c:if test="${userAuth_session != 'user' && not empty userAuth_session}">
 					    <div class="col-md-2 mt-4 rightBtn">
 					    	<button id="notice_insBtn" class="form-control btn btn-primary" type="button">글작성</button>
 					    </div>
