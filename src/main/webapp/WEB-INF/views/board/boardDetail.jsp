@@ -192,8 +192,12 @@
 				$(data).each(function(idx,cmt){
 					var regdate = cmt.regdate.substr(0,10);
 					var uptdate = cmt.uptdate.substr(0,10);
-					addHtml += "<div class='card'><div class='card-header'><div class='comment-div'><div class='comment-header-left'>"
-								+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>"+cmt.nickname+"</h5><small> ("+cmt.id+") </small>";
+					addHtml += "<div class='card'>"
+								+ "<div class='card-header'>"
+								+ "<div class='comment-div'>"
+								+ "<div class='comment-header-left'>"
+								+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>"+cmt.nickname+"</h5>"
+								+ "<small> ("+cmt.id+") </small>";
 					if(cmt.regdate!=cmt.uptdate){
 						addHtml += "<small>- "+uptdate+" </small><samll> (수정됨) </small></div>";
 					}else{
@@ -201,12 +205,16 @@
 					}
 					if("${userAuth_session}"=='user'){
 						if("${userId_session}"==cmt.id){
-							addHtml += "<div class='comment-header-right'><span><small onclick='delComment("+cmt.commentno+")'>삭제</small></span>"
-										+ "</div><div class='comment-header-right' onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'><span><small>수정</small></span></div>";
+							addHtml += "<div class='comment-header-right'>"
+										+ "<span><small onclick='delComment("+cmt.commentno+")'>삭제</small></span></div>"
+										+ "<div class='comment-header-right' onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'>"
+										+ "<span><small>수정</small></span></div>";
 						}	
 					}else{
-						addHtml += "<div class='comment-header-right'><span><small onclick='delComment("+cmt.commentno+")'>삭제</small></span>"
-							+ "</div><div class='comment-header-right'><span><small onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'>수정</small></span></div>";
+						addHtml += "<div class='comment-header-right'>"
+									+ "<span><small onclick='delComment("+cmt.commentno+")'>삭제</small></span>"
+									+ "</div><div class='comment-header-right'>"
+									+ "<span><small onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'>수정</small></span></div>";
 					}
 					
 					addHtml += "</div></div><div id='comment-idx-"+cmt.commentno+"' class='card-body comment-card-body'>"+cmt.content+"</div></div>";
@@ -225,7 +233,9 @@
 					var isActive = "";
 					var startB = data.startBlock;
 					var endB = data.endBlock;
-					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+(startB-1)+')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+					addHTML2 += '<li class="page-item">'
+								+ '<a class="page-link" href="javascript:goPage('+(startB-1)+')" aria-label="Previous">'
+								+ '<span aria-hidden="true">&laquo;</span></a></li>';
 					for(var cnt=startB; cnt<=endB; cnt++){
 						if(data.curPage==cnt){
 							isActive='active';
@@ -233,15 +243,23 @@
 							isActive='';
 						}
 						if(cnt>0){
-							addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>';
+							addHTML2 += '<li class="page-item">'
+										+ '<a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>';
 						}
 					}
-					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+(endB+1)+')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+					addHTML2 += '<li class="page-item">'
+								+ '<a class="page-link" href="javascript:goPage('+(endB+1)+')" aria-label="Next">'
+								+ '<span aria-hidden="true">&raquo;</span></a></li>';
 					$("#comment_list_block").html(addHTML2);
 				}else{
-					var addHTML3 = "<div class='card'><div class='card-header'><div class='comment-div'><div class='comment-header-left'>"
+					var addHTML3 = "<div class='card'>"
+									+ "<div class='card-header'>"
+									+ "<div class='comment-div'>"
+									+ "<div class='comment-header-left'>"
 									+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>아직 댓글이 없습니다!</h5>"
-									+ "</div></div></div><div class='card-body comment-card-body'><p></p></div></div>";		
+									+ "</div></div></div>"
+									+ "<div class='card-body comment-card-body'>"
+									+ "<p></p></div></div>";		
 					$("#commentList-contents").html(addHTML3);
 					console.log(addHTML3);
 				}

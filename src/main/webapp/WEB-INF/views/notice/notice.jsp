@@ -72,7 +72,11 @@
 				var addHTML = "";
 				$(data).each(function(idx, data){
 					regdate = data.regdate.substring(0,10);
-					addHTML+= "<tr class='noticeListpart' onclick='noticeDetail("+data.noticeno+")'><td scope='col'>"+data.noticeno+"</td><td scope='col'>"+data.title+"</td><td scope='col'>"+data.nickname+"</td><td scope='col'>"+regdate+"</td></tr>";
+					addHTML+= "<tr class='noticeListpart' onclick='noticeDetail("+data.noticeno+")'>"
+								+ "<td scope='col'>"+data.noticeno+"</td>"
+								+ "<td scope='col'>"+data.title+"</td>"
+								+ "<td scope='col'>"+data.nickname+"</td>"
+								+ "<td scope='col'>"+regdate+"</td></tr>";
 				})
 				$("#notice_data_list").html(addHTML);
 			}
@@ -86,7 +90,9 @@
 				var isActive = "";
 				var startB = data.startBlock;
 				var endB = data.endBlock;
-				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+startB+')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+				addHTML2 += '<li class="page-item">'
+							+ '<a class="page-link" href="javascript:goPage('+startB+')" aria-label="Previous">'
+							+ '<span aria-hidden="true">&laquo;</span></a></li>';
 				for(var cnt=startB; cnt<=endB; cnt++){
 					if(data.curPage==cnt){
 						isActive='active';
@@ -94,10 +100,13 @@
 						isActive='';
 					}
 					if(cnt>0){
-						addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>';
+						addHTML2 += '<li class="page-item">'
+									+ '<a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>';
 					}
 				}
-				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+endB+')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+				addHTML2 += '<li class="page-item">'
+							+ '<a class="page-link" href="javascript:goPage('+endB+')" aria-label="Next">'
+							+ '<span aria-hidden="true">&raquo;</span></a></li>';
 				$("#notice_list_block").html(addHTML2);
 				$("[name=pageSize]").val(data.pageSize);
 			},

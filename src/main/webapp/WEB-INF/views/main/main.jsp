@@ -28,6 +28,23 @@
 	tbody{
 		cursor:pointer;
 	}
+	.chating{
+		background-color: rgb(238,238,238);
+		width: 100%;
+		height: 500px;
+		overflow: auto;
+		padding-top: 25px;
+		margin-top: 25px;
+	}
+	.chating p{
+		color: black;
+		text-align: left;
+		padding-left: 15px;
+	}
+	input{
+		width: 330px;
+		height: 25px;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -41,15 +58,80 @@
 		$("#board-tab").click(function(){
 			location.href="boardList.do";
 		})
+		$("#show-btn").click(function(){
+			$(".chatting-area").show();
+		})
+		$("#hide-btn").click(function(){
+			$(".chatting-area").hide();
+		})
+		$("#yourMsg").hide();
+		chatName();
 	});
 	
-function goNoticeDetail(noticeno){
-	location.href="noticeDetailPage.do?noticeno="+noticeno;
-}
-function goBoardDetail(boardno){
-	location.href="boardDetail.do?boardno="+boardno;
-}
+	function goNoticeDetail(noticeno){
+		location.href="noticeDetailPage.do?noticeno="+noticeno;
+	}
+	function goBoardDetail(boardno){
+		location.href="boardDetail.do?boardno="+boardno;
+	}
 
+	<%-- 채팅 js --%>
+	var ws;
+	
+	function wsOpen(){
+		ws = new WebSocket("ws://" + location.host + "/chating");
+		wsEvt();
+	}
+	
+	function wsEvt(){
+		ws.onopen = function(data){
+			// 소켓이 열리면 초기화 세팅
+			sendEnter()
+		}
+		
+		ws.onmessage = function(data){
+			var msg = data.data;
+			if(msg != null && msg.trim() != ""){
+				$("#chating").append("<p>" + msg + "</p>");
+			}
+		}
+		
+		document.addEventListener("keypress", function(e){
+			if(e.keyCode == 13){
+				send();
+			}
+		})
+	}
+	
+	function chatName(){
+		var userName = $("#userName").val();
+		if(userName == null || userName.trim() == ""){
+			alert("사용자 이름을 입력해주세요.");
+			$("#userName").focus();
+		}else{
+			wsOpen();
+			$("#yourName").hide();
+			$("#yourMsg").show();
+			$("#chatting").focus();
+		}
+	}
+	
+	function send(){
+		var uN = $("#userName").val();
+		var msg = $("#chatting").val();
+		ws.send(uN+" : "+msg);
+		$("#chatting").val("");
+		
+		var chat = document.querySelector("#chating");
+		chat.scrollTop = chat.scrollHeight;
+	}
+	
+	function sendEnter(){
+		var uN = $("#userName").val();
+		var msg = $("#chatting").val();
+		ws.send(uN+"님이 채팅방에 입장하셨습니다.");
+		$("#chatting").val("");
+	}
 </script>
 </head>
 <body>
@@ -142,6 +224,41 @@ function goBoardDetail(boardno){
 			</div>
 		</div>
 	</section>
+	<c:if test="${not empty userId_session}">
+		<div class="col-lg-6 chatting-card">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="card-title" style="font-weight:bold;">
+						채팅
+					</h5>
+				</div>
+				<div class="card-body chatting-area">
+					<div id="chating" class="chating"></div>
+					<div id="yourName">
+						<table class="">
+							<tr>
+								<th><input type="hidden" name="userName" id="userName" value="${user_info.nickname}"/></th>
+								<th><button onclick="chatName()" id="startBtn">채팅방 입장</button></th>
+							</tr>
+						</table>
+					</div>
+					<div id="yourMsg">
+						<table class="">
+							<tr>
+								<th>메시지</th>
+								<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
+								<th><button onclick="send()" id="sendBtn">보내기</button></th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button id="show-btn" class="btn btn-primary">보이기</button>
+					<button id="hide-btn" class="btn btn-warning">숨기기</button>							
+				</div>
+			</div>
+		</div>
+	</c:if>
 </main>
 
 <!-- Vendor JS Files -->
