@@ -18,7 +18,7 @@ public class LoginController {
 	// http://localhost:5080/login.do
 	@RequestMapping("login.do")
 	public String login() {
-		return "login";
+		return "user/login";
 	}
 	
 	@RequestMapping("loginCheck.do")
@@ -30,12 +30,12 @@ public class LoginController {
 			session.setAttribute("userPf_session", service.getUserInfo_Id(inp.getId()).getPfimg());
 		}
 		
-		return "login";
+		return "user/login";
 	}
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session, Model d) {
 		session.invalidate();
 		d.addAttribute("isLogout", "logout");
-		return "main";
+		return "main/main";
 	}
 }

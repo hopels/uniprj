@@ -36,7 +36,7 @@ public class MyPageController {
 			d.addAttribute("wb", service.writeB_cnt(userno));
 			d.addAttribute("wc", service.writeC_cnt(userno));
 		}
-		return "myPage";
+		return "user/myPage";
 	}
 	
 	@RequestMapping("uptDevPart.do")
@@ -54,7 +54,7 @@ public class MyPageController {
 	public String uptUserDetail(User ins, Model d) {
 		service.uptUserDetail(ins);
 		d.addAttribute("proc", "upt");
-		return "myPage";
+		return "user/myPage";
 	}
 	
 	@RequestMapping("uptUserPw.do")
@@ -73,6 +73,6 @@ public class MyPageController {
 		}
 		
 		
-		return "myPage";
+		return "user/myPage";
 	}
 }

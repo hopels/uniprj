@@ -36,27 +36,27 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	if("${userAuth_session}"!="admin" || "${userAuth_session}"==""){
-		alert("접근 권한이 없습니다.")
-		location.href="MainPage.do"
+		alert("접근 권한이 없습니다.");
+		location.href="MainPage.do";
 	}
 	function hoverUser(userno){
-		$("[name=userno]").val(userno)
+		$("[name=userno]").val(userno);
 	}
 	const change = (target) => {
-		$("[name=auth]").val(target.value)
+		$("[name=auth]").val(target.value);
 		if(confirm("권한을 변경하시겠습니까?")){
-			$("#auth-change-frm").attr("action","uptAuth.do").submit()
+			$("#auth-change-frm").attr("action","uptAuth.do").submit();
 		}
 	}
 	if("${proc}"=="uptAuth"){
-		alert("권한이 변경되었습니다.")
-		location.href="adminPage.do"
+		alert("권한이 변경되었습니다.");
+		location.href="adminPage.do";
 	}
 </script>
 
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
 		<h1>관리자 페이지</h1>

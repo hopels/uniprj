@@ -20,7 +20,7 @@ public class NoticeController {
 	// http://localhost:5080/noticePage.do
 	@RequestMapping("noticePage.do")
 	public String noticePage() {
-		return "notice";
+		return "notice/notice";
 	}
 	
 	// http://localhost:5080/noticeDetailPage.do
@@ -31,7 +31,7 @@ public class NoticeController {
 		}else {
 			return "redirect:/noticePage.do";
 		}
-		return "noticeDetail";
+		return "notice/noticeDetail";
 	}
 	
 	// http://localhost:5080/newNotice.do
@@ -40,7 +40,7 @@ public class NoticeController {
 		if(session != null && session.getAttribute("userId_session") != null) {
 			d.addAttribute("userno",service.getUserno_id((String)session.getAttribute("userId_session")));
 		}
-		return "newNotice";
+		return "notice/newNotice";
 	}
 	
 	//
@@ -48,7 +48,7 @@ public class NoticeController {
 	public String insNotice(Notice ins, Model d) {
 		service.insNotice(ins);
 		d.addAttribute("proc","ins");
-		return "newNotice";
+		return "notice/newNotice";
 	}
 	
 	// http://localhost:5080/uptNoticePage.do
@@ -59,10 +59,10 @@ public class NoticeController {
 				d.addAttribute("userno",service.getUserno_id((String)session.getAttribute("userId_session")));
 				d.addAttribute("noticeDetail", service.getNoticeDetail(noticeno));
 			}else {
-				return "notice";
+				return "notice/notice";
 			}
 		}
-		return "uptNotice";
+		return "notice/uptNotice";
 	}
 	
 	@RequestMapping("uptNotice.do")
@@ -73,7 +73,7 @@ public class NoticeController {
 		}else {
 			d.addAttribute("proc", "err");
 		}
-		return "uptNotice";
+		return "notice/uptNotice";
 	}
 	
 	@RequestMapping("delNotice.do")
@@ -93,6 +93,6 @@ public class NoticeController {
 			d.addAttribute("proc", "err");
 		}
 		
-		return "noticeDetail";
+		return "notice/noticeDetail";
 	}
 }

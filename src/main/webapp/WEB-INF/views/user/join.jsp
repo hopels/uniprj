@@ -40,106 +40,106 @@
 		var pwPattern = /^(?=.*[a-z])(?=.*\d)[a-z0-9_-]{8,16}$/
 		var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		$("#id_valid_btn").click(function(){
-			var userid = $("#userid").val()
+			var userid = $("#userid").val();
 			if(userid==""){
-				alert("아이디를 입력해주세요")
-				return
+				alert("아이디를 입력해주세요");
+				return;
 			}
 			if(!userid.match(idPattern)){
-				alert("아이디는 8~16자 영문+숫자 조합입니다.")
-				return
+				alert("아이디는 8~16자 영문+숫자 조합입니다.");
+				return;
 			}
-			idValidCheck()
+			idValidCheck();
 		})
 		$("#userid").keyup(function(){
-			$("#id_valid_feedback").text("")
-			$("id_valid_result").val("n")
+			$("#id_valid_feedback").text("");
+			$("id_valid_result").val("n");
 		})
 		$("#userpw").keyup(function(){
-			var userpw=$("#userpw").val()
-			$("#pw_corr_feedback").text("")
-			$("#pw_corr_result").val("n")
+			var userpw=$("#userpw").val();
+			$("#pw_corr_feedback").text("");
+			$("#pw_corr_result").val("n");
 			if(userpw.match(pwPattern)){
-				$("#pw_valid_feedback").text("사용가능한 비밀번호입니다.").css("color","green")
-				$("#pw_valid_result").val("y")
+				$("#pw_valid_feedback").text("사용가능한 비밀번호입니다.").css("color","green");
+				$("#pw_valid_result").val("y");
 			}else{
-				$("#pw_valid_feedback").text("비밀번호는 영문+숫자 조합 8~16자리입니다.").css("color","red")
-				$("#pw_valid_result").val("n")
+				$("#pw_valid_feedback").text("비밀번호는 영문+숫자 조합 8~16자리입니다.").css("color","red");
+				$("#pw_valid_result").val("n");
 			}
 		})
 		$("#userpw_re").keyup(function(){
-			var userpwre=$("#userpw_re").val()
+			var userpwre=$("#userpw_re").val();
 			if(userpwre==$("#userpw").val()){
-				$("#pw_corr_feedback").text("비밀번호가 일치합니다").css("color","green")
-				$("#pw_corr_result").val("y")
+				$("#pw_corr_feedback").text("비밀번호가 일치합니다").css("color","green");
+				$("#pw_corr_result").val("y");
 			}else{
-				$("#pw_corr_feedback").text("비밀번호가 일치하지 않습니다.").css("color","red")
-				$("#pw_corr_result").val("n")
+				$("#pw_corr_feedback").text("비밀번호가 일치하지 않습니다.").css("color","red");
+				$("#pw_corr_result").val("n");
 			}
 		})
 		
 		
 		$("#join_btn").click(function(){
-			var input_nickname = $("#user_nickname").val()
-			var input_email = $("#user_email").val()
+			var input_nickname = $("#user_nickname").val();
+			var input_email = $("#user_email").val();
 			if(input_nickname==""){
-				alert("닉네임을 입력해주세요")
-				return
+				alert("닉네임을 입력해주세요");
+				return;
 			}
 			if(input_nickname.length<2 || input_nickname>16){
-				alert("닉네임은 2~16자리 사이로 입력해주세요")
-				return
+				alert("닉네임은 2~16자리 사이로 입력해주세요");
+				return;
 			}
 			if(input_email==""){
-				alert("이메일을 입력해주세요")
-				return
+				alert("이메일을 입력해주세요");
+				return;
 			}
 			if(!input_email.match(emailPattern)){
-				alert("이메일 형식이 올바르지 않습니다.")
-				return
+				alert("이메일 형식이 올바르지 않습니다.");
+				return;
 			}
 			if($("#id_valid_result").val()!="y"){
-				alert("아이디 중복체크를 해주세요")
-				return
+				alert("아이디 중복체크를 해주세요");
+				return;
 			}
 			if($("#pw_valid_result").val()!="y"){
-				alert("비밀번호 형식이 올바르지 않습니다.")
-				return
+				alert("비밀번호 형식이 올바르지 않습니다.");
+				return;
 			}
 			if($("#pw_corr_result").val()!="y"){
-				alert("두 비밀번호가 일치하지 않습니다.")
-				return
+				alert("두 비밀번호가 일치하지 않습니다.");
+				return;
 			}
-			$("#join_frm").attr("action","userReg.do")
-			$("#join_frm").submit()
+			$("#join_frm").attr("action","userReg.do");
+			$("#join_frm").submit();
 		})
 		
 	});
 	
 	function idValidCheck(){
-		var inputid= $("#userid").val()
+		var inputid= $("#userid").val();
 		$.ajax({
 			url:"idValidCheck.do",
 			data:"id="+inputid,
 			dataType:"json",
 			success:function(data){
-				console.log(data.valid)
+				console.log(data.valid);
 				if(data.valid=='nonId'){
-					$("#id_valid_feedback").text("사용가능한 아이디입니다.").css("color","green")
-					$("#id_valid_result").val("y")
+					$("#id_valid_feedback").text("사용가능한 아이디입니다.").css("color","green");
+					$("#id_valid_result").val("y");
 				}
 				if(data.valid=='nonPw'){
-					$("#id_valid_feedback").text("이미 사용중인 아이디입니다.").css("color","red")
-					$("#id_valid_result").val("n")
+					$("#id_valid_feedback").text("이미 사용중인 아이디입니다.").css("color","red");
+					$("#id_valid_result").val("n");
 				}
 			}
 		})
 	}
-	var proc = "${proc}"
+	var proc = "${proc}";
 	if(proc!=""){
 		if(proc=="Y"){
-			alert("회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다.")
-			location.href="login.do"
+			alert("회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다.");
+			location.href="login.do";
 		}
 	}
 

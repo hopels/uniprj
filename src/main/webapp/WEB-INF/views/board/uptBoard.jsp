@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>자유게시판[게시글 수정]</title>
   <link href="${path}/resources/NiceAdmin/assets/img/favicon.png" rel="icon">
   <link href="${path}/resources/NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -21,100 +21,99 @@
   <link href="${path}/resources/NiceAdmin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="${path}/resources/NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
   <link href="${path}/resources/NiceAdmin/assets/css/style.css" rel="stylesheet">
+<style type="text/css">
+	.ck-editor__editable { height: 700px; }
+	hr{
+		background:rgb(65,84,241);
+		height:2px;
+		border:0;
+	}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#login_btn").click(function(){
-			loginfunc()
-		})
-		$("#userpw").keyup(function(){
-			if(event.keyCode==13){
-				loginfunc()
+		var origin_content ='${boardDetail.content}';
+		editor.setData(origin_content);
+		
+		$("#board_uptBtn").click(function(){
+			if($("#input_title").val()==""){
+				alert("제목을 입력해주세요");
+				$("#input_title").focus();
+				return;
+			}
+			if(editor.getData().length<10){
+				alert("내용이 너무 짧습니다.");
+				editor.focus();
+				return;
+			}
+			$("[name=content]").val(editor.getData());
+			if(confirm("게시글을 수정하시겠습니까?")){
+				$("#uptBoard_form").attr("action","uptBoard.do").submit()	;
 			}
 		})
-		$("#join_btn").click(function(){
-			location.href="joinPage.do"
-		})
 	});
-	
-	var proc = "${proc}";
-	if(proc!=""){
-		if(proc=="nonId"){
-			alert("존재하지 않는 아이디입니다.")
-			location.href="login.do"
-		}
-		if(proc=="nonPw"){
-			alert("비밀번호가 일치하지 않습니다.")
-			location.href="login.do"
-		}
-		if(proc=="pass"){
-			location.href="MainPage.do"
-		}
+	if("${proc}"=="upt"){
+		alert("게시글이 수정되었습니다.");
+		location.href="boardList.do";
 	}
-	function loginfunc(){
-		if($("#userid").val()==""){
-			alert("아이디를 입력해주세요")
-			$("#userid").focus()
-			return
-		}
-		if($("#userpw").val()==""){
-			alert("비밀번호를 입력해주세요")
-			$("#userpw").focus()
-			return
-		}
-		$("#frm01").attr("action","loginCheck.do")
-		$("#frm01").submit()
+	if("${userId_session}"==""){
+		alert("로그인 후 이용해주세요");
+		location.href="login.do";
 	}
 </script>
 </head>
 <body>
+<jsp:include page="../config/nav.jsp"/>
+<main id="main" class="main">
+	<div class="pagetitle">
+		<h1>게시글 수정</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="MainPage.do"><i class="bi bi-house-door"></i></a></li>
+				<li class="breadcrumb-item">Board</li>
+				<li class="breadcrumb-item active">Update Board</li>
+			</ol>
+		</nav>
+	</div>
 
-<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
 	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-				<div class="d-flex justify-content-center py-4">
-					<a href="login.do" class="logo d-flex align-items-center w-auto">
-						<img src="${path}/resources/NiceAdmin/assets/img/logo.png" alt="">
-						<span class="d-none d-lg-block">UNI Community</span>
-					</a>
-				</div><!-- End Logo -->
-				<div class="card mb-3">
-					<div class="card-body">
-						<div class="pt-4 pb-2">
-							<h5 class="card-title text-center pb-0 fs-4" style="font-weight:bold">로그인</h5>
-							<p class="text-center small">아이디 & 비밀번호를 입력하세요</p>
-						</div>
-					
-						<form id="frm01" class="row g-3 needs-validation"  method="post">
-							
-							<div class="col-12">
-						  		<label for="userid" class="form-label">아이디</label>
-							    <input id="userid" name="id" class="form-control mr-sm-2" placeholder="아이디" />
-						    </div>
-						    
-						    <div class="col-12">
-							    <label for="userpw" class="form-label">비밀번호</label>
-							    <input type="password" id="userpw" name="pw" class="form-control mr-sm-2" placeholder="비밀번호" />
-						    </div>
-						    
-						    <button class="btn btn-primary w-100" id="login_btn" type="button">로그인</button>
-							<div class="col-12">
-								<p class="small mb-0 text-center"><a href="MainPage.do" style="font-weight:bold;">비로그인으로 이용하기</a></p>
-							</div>
-						</form>
-					</div>
+		<div class="card">
+			<div class="card-header">
+				<div class="pagetitle" style="padding-top:80px;">
+					<h1 align="center" style="font-size:30px">게시글 수정</h1>
 				</div>
-				<div class="credits">
-                아직 회원이 아니신가요?&nbsp;&nbsp;&nbsp;&nbsp;<a href="joinPage.do">회원가입하기</a>
-              </div>
+			</div>
+			<hr>
+			<div class="card-body mt-4" style="padding-top:3%">
+				<form id="uptBoard_form" enctype="multipart/form-data" class="row g-3" method="post">
+					<input id="input_userno" type="hidden" name="boardno" value="${param.boardno}"/>
+					<input id="input_userno" type="hidden" name="userno" value="${userno}"/>
+					<div class="row mb-3">
+						<label for="input_title" class="col-sm-1 col-form-label">제목</label>
+						<div class="col-sm-5">
+							<input id="input_title" class="form-control" name="title" value="${boardDetail.title}"/>
+						</div>
+					</div>
+					<div class="col-md12 mt-4" style="height:770px;">
+						<label for="editor" class="form-label">내용</label>
+						<textarea id="editor" rows="500" cols="500"></textarea>
+					</div>
+					<input type="hidden" name="content" value=""/>
+					<button id="board_uptBtn" class="form-control btn btn-primary" type="button">수정</button>
+				</form>
+			</div>
+			<div class="card-footer">
+			
 			</div>
 		</div>
 	</div>
-</section>
+</main>
 
 <!-- Vendor JS Files -->
 <script src="${path}/resources/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -128,5 +127,6 @@
 
 <!-- Template Main JS File -->
 <script src="${path}/resources/NiceAdmin/assets/js/main.js"></script>
+<script src="${path}/resources/common/js/ckeditor.js"></script>
 </body>
 </html>

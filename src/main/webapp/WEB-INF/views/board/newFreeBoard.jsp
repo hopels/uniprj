@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판[게시글 수정]</title>
+<title>자유게시판[게시글 작성]</title>
   <link href="${path}/resources/NiceAdmin/assets/img/favicon.png" rel="icon">
   <link href="${path}/resources/NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -38,46 +38,41 @@
 <script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var origin_content ='${boardDetail.content}'
-		editor.setData(origin_content)
-		
-		$("#board_uptBtn").click(function(){
+		$("#board_insBtn").click(function(){
 			if($("#input_title").val()==""){
-				alert("제목을 입력해주세요")
-				$("#input_title").focus()
-				return
+				alert("제목을 입력해주세요");
+				$("#input_title").focus();
+				return;
 			}
 			if(editor.getData().length<10){
-				alert("내용이 너무 짧습니다.")
-				editor.focus()
-				return
+				alert("내용이 너무 짧습니다.");
+				editor.focus();
+				return;
 			}
-			$("[name=content]").val(editor.getData())
-			if(confirm("게시글을 수정하시겠습니까?")){
-				$("#uptBoard_form").attr("action","uptBoard.do").submit()	
-			}
+			$("[name=content]").val(editor.getData());
+			$("#insBoard_form").attr("action","boardFileUpload.do").submit();
 		})
 	});
-	if("${proc}"=="upt"){
-		alert("게시글이 수정되었습니다.")
-		location.href="boardList.do"
+	if("${proc}"=="ins"){
+		alert("게시글이 등록되었습니다.");
+		location.href="boardList.do";
 	}
 	if("${userId_session}"==""){
-		alert("로그인 후 이용해주세요")
+		alert("로그인 후 이용해주세요");
 		location.href="login.do";
 	}
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
-		<h1>게시글 수정</h1>
+		<h1>자유게시판</h1>
 		<nav>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="MainPage.do"><i class="bi bi-house-door"></i></a></li>
 				<li class="breadcrumb-item">Board</li>
-				<li class="breadcrumb-item active">Update Board</li>
+				<li class="breadcrumb-item active">New Board</li>
 			</ol>
 		</nav>
 	</div>
@@ -86,26 +81,33 @@
 		<div class="card">
 			<div class="card-header">
 				<div class="pagetitle" style="padding-top:80px;">
-					<h1 align="center" style="font-size:30px">게시글 수정</h1>
+					<h1 align="center" style="font-size:30px">자유게시판</h1>
 				</div>
 			</div>
 			<hr>
 			<div class="card-body mt-4" style="padding-top:3%">
-				<form id="uptBoard_form" enctype="multipart/form-data" class="row g-3" method="post">
-					<input id="input_userno" type="hidden" name="boardno" value="${param.boardno}"/>
+				<form id="insBoard_form" enctype="multipart/form-data" class="row g-3" method="post">
 					<input id="input_userno" type="hidden" name="userno" value="${userno}"/>
 					<div class="row mb-3">
 						<label for="input_title" class="col-sm-1 col-form-label">제목</label>
 						<div class="col-sm-5">
-							<input id="input_title" class="form-control" name="title" value="${boardDetail.title}"/>
+							<input id="input_title" class="form-control" name="title"/>
 						</div>
 					</div>
+					
+					<div class="row mb-3">
+						<label for="input_title" class="col-sm-1 col-form-label">첨부파일</label>
+						<div class="col-sm-5">
+							<input multiple="multiple" type="file" id="input_file" class="form-control" name="report"/>
+						</div>
+					</div>
+					
 					<div class="col-md12 mt-4" style="height:770px;">
 						<label for="editor" class="form-label">내용</label>
 						<textarea id="editor" rows="500" cols="500"></textarea>
 					</div>
 					<input type="hidden" name="content" value=""/>
-					<button id="board_uptBtn" class="form-control btn btn-primary" type="button">수정</button>
+					<button id="board_insBtn" class="form-control btn btn-primary" type="button">작성</button>
 				</form>
 			</div>
 			<div class="card-footer">

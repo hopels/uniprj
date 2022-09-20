@@ -4,10 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script>
-	var isLogout = "${isLogout}"
+	var isLogout = "${isLogout}";
 	if(isLogout=="logout"){
-		alert("페이지에서 로그아웃 되었습니다.")
-		location.href="login.do"
+		alert("페이지에서 로그아웃 되었습니다.");
+		location.href="login.do";
 	}
 </script>
   <!-- ======= Header ======= -->

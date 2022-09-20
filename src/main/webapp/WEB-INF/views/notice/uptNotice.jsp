@@ -32,44 +32,44 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var origin_content = '${noticeDetail.content}'
-		editor.setData(origin_content)
+		var origin_content = '${noticeDetail.content}';
+		editor.setData(origin_content);
 		
 		$("#notice_uptBtn").click(function(){
 			if($("#input_title").val()==""){
-				alert("제목을 입력해주세요")
-				$("#input_title").focus()
-				return
+				alert("제목을 입력해주세요");
+				$("#input_title").focus();
+				return;
 			}
 			if(editor.getData().length<10){
-				alert("내용이 너무 짧습니다.")
-				editor.focus()
-				return
+				alert("내용이 너무 짧습니다.");
+				editor.focus();
+				return;
 			}
-			$("[name=content]").val(editor.getData())
-			$("#uptNotice_form").attr("action", "uptNotice.do").submit()
+			$("[name=content]").val(editor.getData());
+			$("#uptNotice_form").attr("action", "uptNotice.do").submit();
 		})
 	});
 	if("${userId_session}"==""){
-		alert("로그인 후 이용해주세요")
+		alert("로그인 후 이용해주세요");
 		location.href="login.do";
 	}
 	if("${userAuth_session}"=="user"){
-		alert("접근 권한이 없습니다.")
+		alert("접근 권한이 없습니다.");
 		location.href="noticePage.do";
 	}
 	if("${proc}"=="upt"){
-		alert("공지사항이 수정되었습니다.")
+		alert("공지사항이 수정되었습니다.");
 		location.href="noticePage.do";
 	}
 	if("${proc}"=="err"){
-		alert("잘못된 요청입니다.")
+		alert("잘못된 요청입니다.");
 		location.href="mainPage.do";
 	}
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
 		<h1>공지사항 수정</h1>

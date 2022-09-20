@@ -21,13 +21,13 @@ public class AdminController {
 	public String adminPage(Model d) {
 		d.addAttribute("userList", uService.userList());
 		d.addAttribute("authCnt", service.getAuthCount());
-		return "adminPage";
+		return "admin/adminPage";
 	}
 	
 	@RequestMapping("uptAuth.do")
 	public String uptAuth(User upt, Model d) {
 		service.uptAuth(upt);
 		d.addAttribute("proc", "uptAuth");
-		return "adminPage";
+		return "admin/adminPage";
 	}
 }

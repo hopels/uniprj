@@ -24,6 +24,6 @@ public class MainController {
 		d.addAttribute("notice_list", nService.getNoticeList(sch1));
 		d.addAttribute("board_list", bService.getBoardList(sch2));
 		
-		return "main";
+		return "main/main";
 	}
 }

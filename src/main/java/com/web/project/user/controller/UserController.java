@@ -22,14 +22,14 @@ public class UserController {
 	// http://localhost:5080/joinPage.do
 	@RequestMapping("joinPage.do")
 	public String joinPage() {
-		return "join";
+		return "user/join";
 	}
 	
 	@RequestMapping("userReg.do")
 	public String userReg(User ins, Model d) {
 		service.regUser(ins);
 		d.addAttribute("proc", "Y");
-		return "join";
+		return "user/join";
 	}
 	
 }

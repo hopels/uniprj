@@ -53,7 +53,7 @@ public class BoardFileController {
 			}
 		}
 		d.addAttribute("proc", "ins");
-		return "newFreeBoard";
+		return "board/newFreeBoard";
 	}
 	
 	@RequestMapping("fileDownload.do")

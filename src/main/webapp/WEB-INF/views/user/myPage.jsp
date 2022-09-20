@@ -79,182 +79,182 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		devInfoAjax()
+		devInfoAjax();
 		$("#front-icon").click(function(){
 			var jobtype=$("#dev_hidden").val();
 			if(jobtype=="frontend"){
-				alert("이미 선택된 직군입니다.")
-				return
+				alert("이미 선택된 직군입니다.");
+				return;
 			}
 			if(confirm("직군을 변경하시겠습니까?")){
-				frontIconSelect()
-				$("#dev_hidden").val("frontend")
-				$("#dev_frm").attr("action","uptDevPart.do").submit()
+				frontIconSelect();
+				$("#dev_hidden").val("frontend");
+				$("#dev_frm").attr("action","uptDevPart.do").submit();
 			}
 		})
 		$("#back-icon").click(function(){
 			var jobtype=$("#dev_hidden").val();
 			if(jobtype=="backend"){
-				alert("이미 선택된 직군입니다.")
-				return
+				alert("이미 선택된 직군입니다.");
+				return;
 			}
 			if(confirm("직군을 변경하시겠습니까?")){
-				backIconSelect()
-				$("#dev_hidden").val("backend")
-				$("#dev_frm").attr("action","uptDevPart.do").submit()
+				backIconSelect();
+				$("#dev_hidden").val("backend");
+				$("#dev_frm").attr("action","uptDevPart.do").submit();
 			}
 		})
 		$("#full-icon").click(function(){
 			var jobtype=$("#dev_hidden").val();
 			if(jobtype=="fullstack"){
-				alert("이미 선택된 직군입니다.")
-				return
+				alert("이미 선택된 직군입니다.");
+				return;
 			}
 			if(confirm("직군을 변경하시겠습니까?")){
-				fullIconSelect()
-				$("#dev_hidden").val("fullstack")
-				$("#dev_frm").attr("action","uptDevPart.do").submit()
+				fullIconSelect();
+				$("#dev_hidden").val("fullstack");
+				$("#dev_frm").attr("action","uptDevPart.do").submit();
 			}
 		})
 		$("#detail-upt-btn").click(function(){
-			var input_nickname = $("#inputNickname").val()
+			var input_nickname = $("#inputNickname").val();
 			var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			var input_email = $("#inputEmail").val()
+			var input_email = $("#inputEmail").val();
 			if(input_nickname.length<2 || input_nickname>16){
-				alert("닉네임은 2~16자리 사이로 입력해주세요")
-				$("#inputNickname").focus()
-				return
+				alert("닉네임은 2~16자리 사이로 입력해주세요");
+				$("#inputNickname").focus();
+				return;
 			}
 			if(!input_email.match(emailPattern)){
-				alert("이메일 형식이 올바르지 않습니다.")
-				$("#inputEmail").focus()
-				return
+				alert("이메일 형식이 올바르지 않습니다.");
+				$("#inputEmail").focus();
+				return;
 			}
-			$("#detail-upt-form").attr("action","uptUserDetail.do").submit()
+			$("#detail-upt-form").attr("action","uptUserDetail.do").submit();
 		})
 		
 		var pwPattern = /^(?=.*[a-z])(?=.*\d)[a-z0-9_-]{8,16}$/
 		$("#pw-upt-btn").click(function(){
 			if($("#curPassword").val()==""){
-				alert("현재 비밀번호를 입력해주세요")
-				$("#curPassword").focus()
-				return
+				alert("현재 비밀번호를 입력해주세요");
+				$("#curPassword").focus();
+				return;
 			}
 			if($("#inputPassword").val()==""){
-				alert("새 비밀번호를 입력해주세요")
-				$("#curPassword").focus()
-				return
+				alert("새 비밀번호를 입력해주세요");
+				$("#curPassword").focus();
+				return;
 			}
 			if($("#rePassword").val()==""){
-				alert("비밀번호 확인을 입력해주세요")
-				$("#curPassword").focus()
-				return
+				alert("비밀번호 확인을 입력해주세요");
+				$("#curPassword").focus();
+				return;
 			}
 			if($("#pw-valid-result").val()!="y"){
-				alert("새 비밀번호를 확인해주세요")
-				$("#rePassword").focus()
-				return
+				alert("새 비밀번호를 확인해주세요");
+				$("#rePassword").focus();
+				return;
 			}			
-			$("#pw-upt-form").attr("action","uptUserPw.do").submit()
+			$("#pw-upt-form").attr("action","uptUserPw.do").submit();
 		})
 		$("#inputPassword").keyup(function(){
-			var inputPw = $("#inputPassword").val()
-			$("#input-repw-valid-text").text("")
-			$("#pw-valid-result").val("n")
+			var inputPw = $("#inputPassword").val();
+			$("#input-repw-valid-text").text("");
+			$("#pw-valid-result").val("n");
 			if(!inputPw.match(pwPattern)){
-				$("#input-pw-valid-text").text("8~16자리 영어+숫자 조합입니다.").css("color","red")
+				$("#input-pw-valid-text").text("8~16자리 영어+숫자 조합입니다.").css("color","red");
 			}else{
-				$("#input-pw-valid-text").text("사용가능한 비밀번호입니다.").css("color","green")
+				$("#input-pw-valid-text").text("사용가능한 비밀번호입니다.").css("color","green");
 				
 			}
 		})
 		$("#rePassword").keyup(function(){
-			var inputPw = $("#inputPassword").val()
-			var rePw = $("#rePassword").val()
+			var inputPw = $("#inputPassword").val();
+			var rePw = $("#rePassword").val();
 			if(inputPw!="" && inputPw.match(pwPattern)){
 				if(inputPw!=rePw){
-					$("#input-repw-valid-text").text("비밀번호가 일치하지 않습니다.").css("color","red")
-					$("#pw-valid-result").val("n")
+					$("#input-repw-valid-text").text("비밀번호가 일치하지 않습니다.").css("color","red");
+					$("#pw-valid-result").val("n");
 				}else{
-					$("#input-repw-valid-text").text("비밀번호가 일치합니다").css("color","green")
-					$("#pw-valid-result").val("y")
+					$("#input-repw-valid-text").text("비밀번호가 일치합니다").css("color","green");
+					$("#pw-valid-result").val("y");
 				}
 			}
 			
 		})
 		$("#profile-change-link").click(function(){
-			$("[name=report]").click()
+			$("[name=report]").click();
 		})
 		$("[name=report]").change(function(){
-			$("#profile-form").attr("action","mypageFileUpload.do").submit()
+			$("#profile-form").attr("action","mypageFileUpload.do").submit();
 		})
 		$("#adminPage-btn").click(function(){
-			location.href="adminPage.do"
+			location.href="adminPage.do";
 		})
 	});
 	
 	if("${userId_session}"==""){
-		alert("로그인 후 이용해주세요")
+		alert("로그인 후 이용해주세요");
 		location.href="login.do";
 	}
 	if("${proc}"=="upt"){
-		alert("개인정보가 수정되었습니다.")
+		alert("개인정보가 수정되었습니다.");
 		location.href="goMyPage.do";
 	}
 	if("${proc}"=="uptPw"){
-		alert("비밀번호가 변경되었습니다.")
+		alert("비밀번호가 변경되었습니다.");
 		location.href="goMyPage.do";
 	}
 	if("${proc}"=="falsePw"){
-		alert("현재 비밀번호가 다릅니다.")
+		alert("현재 비밀번호가 다릅니다.");
 		location.href="goMyPage.do";
 	}
 	if("${proc}"=="sPw"){
-		alert("현재 비밀번호와 새 비밀번호가 같습니다.")
+		alert("현재 비밀번호와 새 비밀번호가 같습니다.");
 		location.href="goMyPage.do";
 	}
 	function frontIconSelect(){
-		$("#front-icon").css("color","blue")
-		$("#back-icon").css("color","gray")
-		$("#full-icon").css("color","gray")
+		$("#front-icon").css("color","blue");
+		$("#back-icon").css("color","gray");
+		$("#full-icon").css("color","gray");
 	}
 	function backIconSelect(){
-		$("#front-icon").css("color","gray")
-		$("#back-icon").css("color","blue")
-		$("#full-icon").css("color","gray")
+		$("#front-icon").css("color","gray");
+		$("#back-icon").css("color","blue");
+		$("#full-icon").css("color","gray");
 	}
 	function fullIconSelect(){
-		$("#front-icon").css("color","gray")
-		$("#back-icon").css("color","gray")
-		$("#full-icon").css("color","blue")
+		$("#front-icon").css("color","gray");
+		$("#back-icon").css("color","gray");
+		$("#full-icon").css("color","blue");
 	}
 	function devInfoAjax(){
 		$.ajax({
 			url:"devInfoJson.do",
 			dataType:"json",
 			success:function(data){
-				var type = data.jobtype
+				var type = data.jobtype;
 				if(type=="frontend"){
-					$("#dev_info").text("Front-end")
-					$("#dev_hidden").val("frontend")
+					$("#dev_info").text("Front-end");
+					$("#dev_hidden").val("frontend");
 				}
 				if(type=="backend"){
-					$("#dev_info").text("Back-end")
-					$("#dev_hidden").val("backend")
+					$("#dev_info").text("Back-end");
+					$("#dev_hidden").val("backend");
 				}
 				if(type=="fullstack"){
-					$("#dev_info").text("Full-stack")
-					$("#dev_hidden").val("fullstack")
+					$("#dev_info").text("Full-stack");
+					$("#dev_hidden").val("fullstack");
 				}
 				var jobtype=$("#dev_hidden").val();
 				if(jobtype=="frontend"){
-					frontIconSelect()
+					frontIconSelect();
 				}
 				if(jobtype=="backend"){
-					backIconSelect()
+					backIconSelect();
 				}
 				if(jobtype=="fullstack"){
-					fullIconSelect()
+					fullIconSelect();
 				}
 			}
 		})
@@ -262,7 +262,7 @@
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
 		<h1>마이페이지</h1>

@@ -36,24 +36,24 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#notice-tab").click(function(){
-			location.href="noticePage.do"
+			location.href="noticePage.do";
 		})
 		$("#board-tab").click(function(){
-			location.href="boardList.do"
+			location.href="boardList.do";
 		})
 	});
 	
 function goNoticeDetail(noticeno){
-	location.href="noticeDetailPage.do?noticeno="+noticeno
+	location.href="noticeDetailPage.do?noticeno="+noticeno;
 }
 function goBoardDetail(boardno){
-	location.href="boardDetail.do?boardno="+boardno
+	location.href="boardDetail.do?boardno="+boardno;
 }
 
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="card">
 		<div class="card-body">

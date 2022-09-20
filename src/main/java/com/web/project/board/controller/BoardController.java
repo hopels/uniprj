@@ -29,7 +29,7 @@ public class BoardController {
 	@RequestMapping("boardList.do")
 	public String boardList(BoardSch sch, Model d) {
 		d.addAttribute("blist", service.getBoardList(sch));
-		return "freeboard";
+		return "board/freeboard";
 	}
 	
 	// http://localhost:5080/newBoard.do
@@ -38,14 +38,14 @@ public class BoardController {
 		if(session != null && session.getAttribute("userId_session") != null) {
 			d.addAttribute("userno", nService.getUserno_id((String)session.getAttribute("userId_session")));
 		}
-		return "newFreeBoard";
+		return "board/newFreeBoard";
 	}
 	
 	@RequestMapping("insBoard.do")
 	public String insBoard(Board ins, Model d) {
 		service.insBoard(ins);
 		d.addAttribute("proc", "ins");
-		return "newFreeBoard";
+		return "board/newFreeBoard";
 	}
 	
 	// http://localhost:5080/boardDetail.do?boardno=2
@@ -57,10 +57,10 @@ public class BoardController {
 		}
 		if(boardno == 0) {
 			d.addAttribute("proc", "err");
-			return "boardDetail";
+			return "board/boardDetail";
 		}
 		d.addAttribute("boardDetail", service.boardDetail(boardno));
-		return "boardDetail";
+		return "board/boardDetail";
 	}
 	
 	// http://localhost:5080/uptBoardPage.do
@@ -74,25 +74,25 @@ public class BoardController {
 			return "redirect:/boardList.do";
 		}
 		d.addAttribute("boardDetail", service.boardDetail(boardno));
-		return "uptBoard";
+		return "board/uptBoard";
 	}
 	
 	@RequestMapping("uptBoard.do")
 	public String uptBoard(Board upt, Model d) {
 		service.uptBoard(upt);
 		d.addAttribute("proc", "upt");
-		return "uptBoard";
+		return "board/uptBoard";
 	}
 	
 	@RequestMapping("delBoard.do")
 	public String delBoard(@RequestParam(value = "boardno", defaultValue = "0") int boardno, Model d) {
 		if(boardno == 0) {
 			d.addAttribute("proc", "err");
-			return "boardDetail";
+			return "board/boardDetail";
 		}
 		service.delBoard(boardno);
 		d.addAttribute("proc", "del");
-		return "boardDetail";
+		return "board/boardDetail";
 	}
 	// git commit 테스트
 }

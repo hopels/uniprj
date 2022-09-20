@@ -45,32 +45,32 @@
 	$(document).ready(function(){
 		var noticeno = ${param.noticeno}
 		$("#notice_uptbtn").click(function(){
-			location.href="uptNoticePage.do?noticeno="+noticeno
+			location.href="uptNoticePage.do?noticeno="+noticeno;
 		})
 		$("#notice_delbtn").click(function(){
-			location.href="delNotice.do?noticeno="+noticeno
+			location.href="delNotice.do?noticeno="+noticeno;
 		})
 	});
 	var proc = "${proc}"
 	if(proc!=""){
 		if(proc=="del"){
-			alert("공지사항이 삭제되었습니다.")
-			location.href="noticePage.do"
+			alert("공지사항이 삭제되었습니다.");
+			location.href="noticePage.do";
 		}
 		if(proc=="err"){
-			alert("잘못된 요청입니다.")
-			location.href="noticePage.do"
+			alert("잘못된 요청입니다.");
+			location.href="noticePage.do";
 		}
 	}
 	
 	if("${userId_session}"==""){
-		alert("로그인 후 이용해주세요")
+		alert("로그인 후 이용해주세요");
 		location.href="login.do";
 	}
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
 		<h1>공지사항 상세보기</h1>

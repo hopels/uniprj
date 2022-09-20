@@ -78,33 +78,33 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var boardno = ${param.boardno}
+		var boardno = ${param.boardno};
 		commentListajax();
 		$("#board_uptbtn").click(function(){
 			if("${userAuth_session}"!='admin' && "${userAuth_session}"!='manager'){
 				if("${userno}"!="${boardDetail.userno}"){
-					alert("작성자만 수정이 가능합니다.")
-					return
+					alert("작성자만 수정이 가능합니다.");
+					return;
 				}
 			}
-			location.href="uptBoardPage.do?boardno="+boardno
+			location.href="uptBoardPage.do?boardno="+boardno;
 		})
 		$("#board_delbtn").click(function(){
 			if("${userAuth_session}"!='admin' && "${userAuth_session}"!='manager'){
 				if("${userno}"!="${boardDetail.userno}"){
-					alert("작성자만 삭제가 가능합니다.")
-					return
+					alert("작성자만 삭제가 가능합니다.");
+					return;
 				}
 			}
 			if(confirm("게시글을 삭제하시겠습니까?")){
-				location.href="delBoard.do?boardno="+boardno	
+				location.href="delBoard.do?boardno="+boardno;	
 			}
 		})
 		$("#comment-ins-btn").click(function(){
 			if(editor2.getData().length<1){
-				alert("내용을 입력해주세요")
-				$("#editor2").focus()
-				return
+				alert("내용을 입력해주세요");
+				$("#editor2").focus();
+				return;
 			}
 			if(confirm("댓글을 등록하시겠습니까?")){
 				$.ajax({
@@ -112,49 +112,49 @@
 					data:"boardno="+${param.boardno}+"&content="+editor2.getData(),
 					dataType:"json",
 					success:function(data){
-						alert(data.proc)
-						editor2.setData("")
-						commentListajax()
-						goPage(1)
+						alert(data.proc);
+						editor2.setData("");
+						commentListajax();
+						goPage(1);
 					}
 				})
 			}
 		})
 		$("#comment-upt-btn").click(function(){
 			if(editor3.getData().length<1){
-				alert("내용을 입력해주세요")
-				return
+				alert("내용을 입력해주세요");
+				return;
 			}
-			var content = editor3.getData()
-			var commentno = $("#upt-commentno").val()
+			var content = editor3.getData();
+			var commentno = $("#upt-commentno").val();
 			if(confirm("댓글을 수정하시겠습니까?")){
 				$.ajax({
 					url:"uptComment.do",
 					data:"content="+content+"&commentno="+commentno,
 					dataType:"json",
 					success:function(data){
-						alert(data.proc)
-						commentListajax()
-						$(".btn-close").click()
+						alert(data.proc);
+						commentListajax();
+						$(".btn-close").click();
 					}
 				})
 			}
 		})
 	});
-	var proc = "${proc}"
+	var proc = "${proc}";
 	if(proc!=""){
 		if(proc=="del"){
-			alert("게시글이 삭제되었습니다.")
-			location.href="boardList.do"
+			alert("게시글이 삭제되었습니다.");
+			location.href="boardList.do";
 		}
 		if(proc=="err"){
-			alert("잘못된 요청입니다.")
-			location.href="boardList.do"
+			alert("잘못된 요청입니다.");
+			location.href="boardList.do";
 		}
 	}
 	
 	if("${userId_session}"==""){
-		alert("로그인 후 이용해주세요")
+		alert("로그인 후 이용해주세요");
 		location.href="login.do";
 	}
 	function goPage(cnt){
@@ -164,9 +164,9 @@
 		$('html').animate({scrollTop : offset.top}, 200);
 	}
 	function uptEditor(idx){
-		var comment_content=$("#comment-idx-"+idx).html()
-		editor3.setData(comment_content)
-		$("#upt-commentno").val(idx)
+		var comment_content=$("#comment-idx-"+idx).html();
+		editor3.setData(comment_content);
+		$("#upt-commentno").val(idx);
 	}
 	function delComment(commentno){
 		if(confirm("댓글을 삭제하시겠습니까?")){
@@ -175,14 +175,14 @@
 				data:"commentno="+commentno,
 				dataType:"json",
 				success:function(data){
-					alert("댓글이 삭제되었습니다.")
-					commentListajax()
+					alert("댓글이 삭제되었습니다.");
+					commentListajax();
 				}
 			})
 		}
 	}
 	function commentListajax(){
-		var input_curPage = $("[name=curPage]").val()
+		var input_curPage = $("[name=curPage]").val();
 		$.ajax({
 			url:"getCommentList.do",
 			data:"boardno="+${param.boardno}+"&curPage="+input_curPage,
@@ -190,28 +190,28 @@
 			success:function(data){
 				addHtml = "";
 				$(data).each(function(idx,cmt){
-					var regdate = cmt.regdate.substr(0,10)
-					var uptdate = cmt.uptdate.substr(0,10)
+					var regdate = cmt.regdate.substr(0,10);
+					var uptdate = cmt.uptdate.substr(0,10);
 					addHtml += "<div class='card'><div class='card-header'><div class='comment-div'><div class='comment-header-left'>"
-								+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>"+cmt.nickname+"</h5><small> ("+cmt.id+") </small>"
+								+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>"+cmt.nickname+"</h5><small> ("+cmt.id+") </small>";
 					if(cmt.regdate!=cmt.uptdate){
-						addHtml += "<small>- "+uptdate+" </small><samll> (수정됨) </small></div>"
+						addHtml += "<small>- "+uptdate+" </small><samll> (수정됨) </small></div>";
 					}else{
-						addHtml += "<small>- "+regdate+" </small></div>"
+						addHtml += "<small>- "+regdate+" </small></div>";
 					}
 					if("${userAuth_session}"=='user'){
 						if("${userId_session}"==cmt.id){
 							addHtml += "<div class='comment-header-right'><span><small onclick='delComment("+cmt.commentno+")'>삭제</small></span>"
-										+ "</div><div class='comment-header-right' onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'><span><small>수정</small></span></div>"
+										+ "</div><div class='comment-header-right' onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'><span><small>수정</small></span></div>";
 						}	
 					}else{
 						addHtml += "<div class='comment-header-right'><span><small onclick='delComment("+cmt.commentno+")'>삭제</small></span>"
-							+ "</div><div class='comment-header-right'><span><small onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'>수정</small></span></div>"
+							+ "</div><div class='comment-header-right'><span><small onclick='uptEditor("+cmt.commentno+")' data-bs-toggle='modal' data-bs-target='#comment-upt-modal'>수정</small></span></div>";
 					}
 					
-					addHtml += "</div></div><div id='comment-idx-"+cmt.commentno+"' class='card-body comment-card-body'>"+cmt.content+"</div></div>"
+					addHtml += "</div></div><div id='comment-idx-"+cmt.commentno+"' class='card-body comment-card-body'>"+cmt.content+"</div></div>";
 				})
-				$("#commentList-contents").html(addHtml)
+				$("#commentList-contents").html(addHtml);
 				
 			}
 		})
@@ -225,37 +225,37 @@
 					var isActive = "";
 					var startB = data.startBlock;
 					var endB = data.endBlock;
-					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+(startB-1)+')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
+					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+(startB-1)+')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 					for(var cnt=startB; cnt<=endB; cnt++){
 						if(data.curPage==cnt){
-							isActive='active'
+							isActive='active';
 						}else{
-							isActive=''
+							isActive='';
 						}
 						if(cnt>0){
-							addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>'
+							addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>';
 						}
 					}
-					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+(endB+1)+')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
-					$("#comment_list_block").html(addHTML2)
+					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+(endB+1)+')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+					$("#comment_list_block").html(addHTML2);
 				}else{
 					var addHTML3 = "<div class='card'><div class='card-header'><div class='comment-div'><div class='comment-header-left'>"
 									+ "<h5 class='card-title comment-card-title' style='display:inline-block;'>아직 댓글이 없습니다!</h5>"
 									+ "</div></div></div><div class='card-body comment-card-body'><p></p></div></div>";		
-					$("#commentList-contents").html(addHTML3)
-					console.log(addHTML3)
+					$("#commentList-contents").html(addHTML3);
+					console.log(addHTML3);
 				}
 				
 			},
 			error:function(request,status,error){
-				alert("code:"+request.satus+"\n message:"+request.responseText+"\n error:"+error)
+				alert("code:"+request.satus+"\n message:"+request.responseText+"\n error:"+error);
 			}
 		})
 	}
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
 		<h1>자유게시판 상세보기</h1>

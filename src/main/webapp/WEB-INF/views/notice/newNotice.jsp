@@ -35,35 +35,35 @@
 	$(document).ready(function(){
 		$("#notice_insBtn").click(function(){
 			if($("#input_title").val()==""){
-				alert("제목을 입력해주세요")
-				$("#input_title").focus()
-				return
+				alert("제목을 입력해주세요");
+				$("#input_title").focus();
+				return;
 			}
 			if(editor.getData().length<10){
-				alert("내용이 너무 짧습니다.")
-				editor.focus()
-				return
+				alert("내용이 너무 짧습니다.");
+				editor.focus();
+				return;
 			}
-			$("[name=content]").val(editor.getData())
-			$("#insNotice_form").attr("action", "insNotice.do").submit()
+			$("[name=content]").val(editor.getData());
+			$("#insNotice_form").attr("action", "insNotice.do").submit();
 		})
 	});
 	if("${userId_session}"==""){
-		alert("로그인 후 이용해주세요")
+		alert("로그인 후 이용해주세요");
 		location.href="login.do";
 	}
 	if("${userAuth_session}"=="user"){
-		alert("접근 권한이 없습니다.")
+		alert("접근 권한이 없습니다.");
 		location.href="noticePage.do";
 	}
 	if("${proc}"=="ins"){
-		alert("공지사항이 등록되었습니다.")
+		alert("공지사항이 등록되었습니다.");
 		location.href="noticePage.do";
 	}
 </script>
 </head>
 <body>
-<jsp:include page="nav.jsp"/>
+<jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
 		<h1>공지사항 작성</h1>
