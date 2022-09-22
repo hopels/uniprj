@@ -45,6 +45,9 @@
 		width: 330px;
 		height: 25px;
 	}
+	#chat-header{
+		cursor:pointer;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -58,14 +61,17 @@
 		$("#board-tab").click(function(){
 			location.href="boardList.do";
 		})
-		$("#show-btn").click(function(){
-			$(".chatting-area").show();
+		if("${userId_session}"!="") {
+			chatName();
+		}
+		$(".chatting-area").hide();
+		$("#chat-header").click(function(){
+			if("${userId_session}"!=""){
+				$(".chatting-area").slideToggle();
+			}else{
+				alert("로그인 후 이용 가능합니다.");
+			}
 		})
-		$("#hide-btn").click(function(){
-			$(".chatting-area").hide();
-		})
-		$("#yourMsg").hide();
-		chatName();
 	});
 	
 	function goNoticeDetail(noticeno){
@@ -227,7 +233,7 @@
 	<c:if test="${not empty userId_session}">
 		<div class="col-lg-6 chatting-card">
 			<div class="card">
-				<div class="card-header">
+				<div class="card-header" id="chat-header">
 					<h5 class="card-title" style="font-weight:bold;">
 						채팅
 					</h5>
@@ -242,19 +248,10 @@
 							</tr>
 						</table>
 					</div>
-					<div id="yourMsg">
-						<table class="">
-							<tr>
-								<th>메시지</th>
-								<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
-								<th><button onclick="send()" id="sendBtn">보내기</button></th>
-							</tr>
-						</table>
+					<div id="yourMsg" style="background-color:rgb(220,220,220)">
+						<input id="chatting" style="width:80%;height:40px;">
+						<button class="btn btn-outline-primary"onclick="send()" id="sendBtn" style="border:none">보내기</button>
 					</div>
-				</div>
-				<div class="card-footer">
-					<button id="show-btn" class="btn btn-primary">보이기</button>
-					<button id="hide-btn" class="btn btn-warning">숨기기</button>							
 				</div>
 			</div>
 		</div>

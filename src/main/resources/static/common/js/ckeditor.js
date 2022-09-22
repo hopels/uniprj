@@ -13,7 +13,6 @@ ClassicEditor
 			shouldNotGroupWhenFull:true
 			},
     	ckfinder:{
-			uploadUrl:'http://localhost:5080/boardFileUpload.do?',
 			options:{
 				resourceType:'Images'
 			}
