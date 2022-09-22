@@ -114,6 +114,30 @@
 			$("#join_frm").submit();
 		})
 		
+		$("#test_btn").click(function(){
+			$.ajax({
+				url: 'VerifyRecaptcha',
+				type: 'post',
+				data: {
+					recaptcha : $("#g-recaptcha-response").val()
+				},
+				success:function(data){
+					switch(data){
+					case 0:
+						alert("자동 가입 방지 봇 통과");
+						break;
+						
+					case 1:
+						alert("자동 가입 방지 봇을 확인 한 뒤 진행 해 주세요.");
+						break;
+						
+					default:
+						alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : "+ Number(data) +"]");
+						break;
+					}
+				}
+			})
+		})
 	});
 	
 	function idValidCheck(){
@@ -196,6 +220,11 @@
 									    <label for="user_email" class="label">이메일</label>
 									    <input id="user_email" name="email" class="form-control mr-sm-2" placeholder="이메일" />
 								    </div>
+								    
+								    <%-- recaptcha --%>
+								    <div class="g-recaptcha" data-sitekey="6Ld7axsiAAAAAIURv8RC5N8O1p0ToH-2w_CIKKW4"></div>
+								    <button type="button" id="test_btn">테스트</button>
+								    <script src="https://www.google.com/recaptcha/api.js"></script>
 								    
 							    	<button class="btn btn-primary w-100" id="join_btn" type="button">가입하기</button><br><br>
 									<a href="login.do" style="text-align:center;margin-top:30px;">로그인페이지로 이동</a>
