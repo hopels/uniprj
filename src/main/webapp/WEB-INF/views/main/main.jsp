@@ -256,6 +256,15 @@
 			</div>
 		</div>
 	</c:if>
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-header">
+				<h5>test</h5><a href="notRobot.do">test</a>
+			</div>
+			<div class="card-body">
+			</div>
+		</div>
+	</div>
 </main>
 
 <!-- Vendor JS Files -->

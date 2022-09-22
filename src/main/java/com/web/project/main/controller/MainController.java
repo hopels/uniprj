@@ -3,6 +3,7 @@ package com.web.project.main.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,9 @@ public class MainController {
 	
 	@Autowired(required=false)
 	private LoginService lService;
+	
+	@Value("${recaptcha-key}")
+	private String recaptcha_key;
 
 	// http://localhost:5080/MainPage.do
 	@RequestMapping("MainPage.do")
@@ -32,6 +36,12 @@ public class MainController {
 		if(session != null && session.getAttribute("userId_session") != null) {
 			d.addAttribute("user_info", lService.getUserInfo_Id((String)session.getAttribute("userId_session")));
 		}
+		return "main/main";
+	}
+	
+	@RequestMapping("notRobot.do")
+	public String notRobot() {
+		System.out.println(recaptcha_key);
 		return "main/main";
 	}
 }
