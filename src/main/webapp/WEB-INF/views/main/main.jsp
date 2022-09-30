@@ -48,6 +48,10 @@
 	#chat-header{
 		cursor:pointer;
 	}
+	.banner-text{
+		font-weight:bold;
+		color:white;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -99,12 +103,14 @@
 			var msg = data.data;
 			if(msg != null && msg.trim() != ""){
 				$("#chating").append("<p>" + msg + "</p>");
+				scrollcont();
 			}
 		}
 		
 		document.addEventListener("keypress", function(e){
 			if(e.keyCode == 13){
 				send();
+				scrollcont();
 			}
 		})
 	}
@@ -127,7 +133,9 @@
 		var msg = $("#chatting").val();
 		ws.send(uN+" : "+msg);
 		$("#chatting").val("");
-		
+	}
+	
+	function scrollcont(){
 		var chat = document.querySelector("#chating");
 		chat.scrollTop = chat.scrollHeight;
 	}
@@ -148,16 +156,40 @@
 			<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-indicators">
 					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  	<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<img src="https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-blue-sky-and-white-clouds-pure-sky-image_786707.jpg" class="d-block w-100" alt="..." style="margin-top: 30px;max-height:360px">
 						<div class="carousel-caption d-none d-md-block">
-							<h4 style="color:black;font-weight:bold;">UNI Community</h4>
-							<p style="color:gray;">개발자 커뮤니티</p>
+							<h4 class="banner-text">UNI Community</h4>
+							<p class="banner-text">개발자 커뮤니티</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="https://t1.daumcdn.net/cfile/blog/2249E83E57E755F60D" class="d-block w-100" alt="..." style="margin-top: 30px;max-height:360px">
+						<div class="carousel-caption d-none d-md-block">
+							<h4 class="banner-text">UNI Community</h4>
+							<p class="banner-text">개발자 커뮤니티</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="https://p0.pikist.com/photos/392/544/vung-tau-panorama-scenery-the-sea-mountain-clouds-hdr-tr%E1%BB%8Bnh-patience-s-kien.jpg" class="d-block w-100" alt="..." style="margin-top: 30px;max-height:360px">
+						<div class="carousel-caption d-none d-md-block">
+							<h4 class="banner-text">UNI Community</h4>
+							<p class="banner-text">개발자 커뮤니티</p>
 						</div>
 					</div>
 				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
 			</div><!-- End Slides with captions -->
 		</div>
 	</div>
