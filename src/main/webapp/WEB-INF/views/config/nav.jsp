@@ -102,6 +102,13 @@
         </a>
       </li>
       
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="map.do">
+          <i class="bi bi-map"></i>
+          <span>지도</span>
+        </a>
+      </li>
+      
     </ul>
 
   </aside><!-- End Sidebar-->
