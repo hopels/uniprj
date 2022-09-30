@@ -31,9 +31,8 @@ public class MainController {
 	@Autowired(required=false)
 	private LoginService lService;
 	
-	//@Value("${recaptcha-key}")
+	//@Value("${recaptcha-key}") //git pp test
 	//private String recaptcha_key;
-
 	// http://localhost:5080/MainPage.do
 	@RequestMapping("MainPage.do")
 	public String MainPage(HttpSession session, NoticeSch sch1, BoardSch sch2, Model d) {
