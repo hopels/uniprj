@@ -50,7 +50,22 @@
 	}
 	.banner-text{
 		font-weight:bold;
-		color:white;
+		font-size:2rem;
+		letter-spacing: 2px;
+		text-align: center;
+		color: #f35626;
+		background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-animation: hue 10s infinite linear;
+	}
+	@-webkit-keyframes hue {
+	  from {
+	    -webkit-filter: hue-rotate(0deg);
+	  }
+	  to {
+	    -webkit-filter: hue-rotate(-360deg);
+	  }
 	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
