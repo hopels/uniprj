@@ -81,14 +81,14 @@
 	
 	#map{
 		 width:45%;
-		 height:700px;
+		 height:500px;
 		 display:inline-block;
 		 margin-left:40px;
 	}
 	
 	#co-list{
 		width:45%;
-		height:700px;
+		height:500px;
 		display:inline-block;
 		background-color: rgb(250, 250, 250);
 		padding-top:15px;
@@ -102,11 +102,6 @@
 		margin:0 auto;
 		margin-top:15px;
 		padding-top:15px;
-	}
-	
-	.co-list-contents:hover{
-		border:1px solid red;
-		cursor:pointer;
 	}
 	
 	.contents-title{
@@ -125,19 +120,6 @@
 		font-size: 12px;
 		margin-left:30px;
 	}
-	
-	.first-active{
-		border-bottom : 5px solid red;
-		color : red;
-	}
-	.modal-header{
-		padding:30px;
-	}
-	.modal-title-text{
-		margin-left:30px;
-		font-weight: bold;
-		font-size: 20px;
-	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -151,22 +133,6 @@
 			$(".tab-menu-area").css({"border":"none","color":"black"});
 			$(this).css({"border-bottom":"5px solid red","color":"red"});
 		})
-		var addHtml = "";
-		var comList = ${comList2};
-		$(comList).each(function(idx,data){
-			addHtml += '<div class="co-list-contents" data-bs-toggle="modal" data-bs-target="#verticalycentered">' +
-						'<div class="contents-title"><i class="bi bi-heart"></i>&nbsp;'+data.comname+'</div>' +
-						'<div class="contents-address"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;'+data.comaddress+'</div>' +
-						'<div class="tel-num"><i class="bi bi-telephone"></i>&nbsp;&nbsp;'+data.comtel+'</div>' +
-					'</div>';
-		})
-		$("#co-list").html(addHtml);
-		$(".co-list-contents").click(function(){
-			var title = $(this).find(".contents-title").text();
-			var address = $(this).find(".contents-address").text();
-			var telNum = $(this).find(".tel-num").text();
-			$(".modal-title-text").text(title+"지점");
-		})
 	});
 </script>
 </head>
@@ -174,21 +140,21 @@
 <jsp:include page="../config/nav.jsp"/>
 <main id="main" class="main">
 	<div class="pagetitle">
-		<h1>지도</h1>
+		<h1>셀렉트박스</h1>
 		<nav>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="MainPage.do"><i class="bi bi-house-door"></i></a></li>
-				<li class="breadcrumb-item active">Map</li>
+				<li class="breadcrumb-item active">Select Box</li>
 			</ol>
 		</nav>
 	</div>
 	
 	<div class="page_title">
-		<h1 class="page_title_contents">전국지점안내</h1>
+		<h1 class="page_title_contents">셀렉트박스</h1>
 	</div>
 	
 	<div class="tab-menu">
-		<div id="click-active"  class="tab-menu-area first-active">
+		<div id="click-active"  class="tab-menu-area">
 			<h4 class="tab-menu-title">전체</h4>
 		</div>
 		<div class="tab-menu-area">
@@ -222,29 +188,17 @@
 		</div>
 		<div class="card-body">
 			<div id="co-list">
+				<c:forEach begin="0" end="150">
+					<div class="co-list-contents">
+						<div class="contents-title"><i class="bi bi-heart"></i>&nbsp;가산디지털</div>
+						<div class="contents-address"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;서울시 금천구 가산디지털1로 186 제이플리츠 지하1층 B106호</div>
+						<div class="tel-num"><i class="bi bi-telephone"></i>&nbsp;&nbsp;02-3664-8000</div>
+					</div>
+				</c:forEach>
 			</div>
 			<div id="map"></div>	
 		</div>
 		<div class="card-footer"></div>
-	</div>
-	
-	<div class="modal fade" id="verticalycentered" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title"><img src="https://www.lotterentacar.net/lrhp/pc/images/common/logo-header.png"/></h5>
-					<span class="modal-title-text"></span>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<span>지점주소</span>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div>
-		</div>
 	</div>
 	
 	<script type="text/javascript">
@@ -262,32 +216,6 @@
 		// 줌 컨트롤러
 		var zoomControl = new kakao.maps.ZoomControl();
 		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-		
-		// 주소-좌표 변환 객체 생성
-		var geocoder = new kakao.maps.services.Geocoder();
-		
-		var comList = ${comList2};
-		$(comList).each(function(idx, data){
-			geocoder.addressSearch(data.comaddress, function(result, status){
-				if(status == kakao.maps.services.Status.OK){
-					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-					
-					// 마커 표시
-					var marker = new kakao.maps.Marker({
-						map: map,
-						position: coords
-					});
-					
-					// 장소에 대한 설명
-					var infowindow = new kakao.maps.InfoWindow({
-						content:'<div style="width:150px;text-align:center;padding:6px 0;border:3px solid red;border-radius:10px;"><i class="ri ri-car-line" style="color:red;"></i>&nbsp;&nbsp;&nbsp;'+data.comname+'</div>'
-					});
-					infowindow.open(map, marker);
-					
-					map.setCenter(coords);
-				}
-			})
-		})
 	</script>
 </main>
 

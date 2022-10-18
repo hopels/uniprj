@@ -109,6 +109,13 @@
         </a>
       </li>
       
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="boxPage">
+          <i class="bi bi-box"></i>
+          <span>셀렉트박스</span>
+        </a>
+      </li>
+      
     </ul>
 
   </aside><!-- End Sidebar-->
