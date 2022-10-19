@@ -187,36 +187,10 @@
 			</div>
 		</div>
 		<div class="card-body">
-			<div id="co-list">
-				<c:forEach begin="0" end="150">
-					<div class="co-list-contents">
-						<div class="contents-title"><i class="bi bi-heart"></i>&nbsp;가산디지털</div>
-						<div class="contents-address"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;서울시 금천구 가산디지털1로 186 제이플리츠 지하1층 B106호</div>
-						<div class="tel-num"><i class="bi bi-telephone"></i>&nbsp;&nbsp;02-3664-8000</div>
-					</div>
-				</c:forEach>
-			</div>
-			<div id="map"></div>	
+			
 		</div>
 		<div class="card-footer"></div>
 	</div>
-	
-	<script type="text/javascript">
-		var mapContainer = document.getElementById('map'),
-		mapOption={
-			center:new kakao.maps.LatLng(37.481618, 126.882554),
-			level:3
-		};
-		var map = new kakao.maps.Map(mapContainer, mapOption);
-		
-		// 지도 타입 컨트롤러
-		var mapTypeControl = new kakao.maps.MapTypeControl();
-		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-		
-		// 줌 컨트롤러
-		var zoomControl = new kakao.maps.ZoomControl();
-		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	</script>
 </main>
 
 <!-- Vendor JS Files -->

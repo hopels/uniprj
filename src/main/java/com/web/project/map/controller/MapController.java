@@ -1,22 +1,19 @@
 package com.web.project.map.controller;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.web.project.map.service.MapService;
 
 @Controller
+@RequestMapping("center/")
 public class MapController {
 	@Autowired(required=false)
 	private MapService service;

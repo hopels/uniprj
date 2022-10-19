@@ -38,6 +38,7 @@
 		width:33%;
 		height:auto;
 		padding-bottom: 25px;
+		cursor:pointer;
 	}
 	
 	.tab-menu-title{
@@ -138,6 +139,23 @@
 		font-weight: bold;
 		font-size: 20px;
 	}
+	#map2{
+		width:350px;
+		height:400px;
+		border: 1px solid red;
+		display:inline-block;
+		margin-right:30px;
+	}
+	#info-area{
+		width:350px;
+		height:auto;
+		border:1px solid green;
+		display:inline-block;
+	}
+	.modal-body{
+		padding:30px;
+		
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -159,15 +177,48 @@
 						'<div class="contents-address"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;'+data.comaddress+'</div>' +
 						'<div class="tel-num"><i class="bi bi-telephone"></i>&nbsp;&nbsp;'+data.comtel+'</div>' +
 					'</div>';
-		})
+		});
+		$("#sch-btn").click(function(){
+			alert("미구현");
+		});
 		$("#co-list").html(addHtml);
 		$(".co-list-contents").click(function(){
 			var title = $(this).find(".contents-title").text();
 			var address = $(this).find(".contents-address").text();
 			var telNum = $(this).find(".tel-num").text();
 			$(".modal-title-text").text(title+"지점");
+			setTimeout(loadmapcallback(address, title, loadmap), 1000);
+			
+			// 주소-좌표 변환 객체 생성
+			
 		})
 	});
+	
+	//call back func
+	var loadmapcallback = (address, title, callback) => {
+		callback(address, title);
+	}
+	var loadmap = (address, title) => {
+		var geocoder2 = new kakao.maps.services.Geocoder();
+		geocoder2.addressSearch(address, function(result, status){
+			if(status == kakao.maps.services.Status.OK){
+				var coords2 = new kakao.maps.LatLng(result[0].y, result[0].x);
+				// 마커 표시
+				var marker2 = new kakao.maps.Marker({
+					map: map2,
+					position: coords2
+				});
+				
+				// 장소에 대한 설명
+				var infowindow2 = new kakao.maps.InfoWindow({
+					content:'<div style="width:150px;height:100%;text-align:center;padding:6px 0;border:3px solid red;border-radius:10px;"><i class="ri ri-car-line" style="color:red;"></i>&nbsp;&nbsp;&nbsp;'+title+'지점</div>'
+				});
+				infowindow2.open(map2, marker2);
+				
+				map2.setCenter(coords2);
+			}
+		})
+	}
 </script>
 </head>
 <body>
@@ -203,7 +254,7 @@
 		<div class="card-haeder">
 			<div class="sch-area">
 				<input class="input-sch-bar sch-contents" name="cname" type="text" placeholder="지역으로 검색하시거나, 지점명을 검색하시면 가까운 매장을 찾으실 수 있습니다."/>
-				<button class="sch-btn sch-contents" type="button">검색</button>
+				<button id="sch-btn" class="sch-btn sch-contents" type="button">검색</button>
 				<select class="sch-area-select sch-contents" name="region">
 					<option>지역-전체보기</option>
 					<option>서울</option>
@@ -237,7 +288,17 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<span>지점주소</span>
+					<div id="map2"></div>
+					<div id="info-area">
+						<span>지점주소</span>
+						<span>지점주소</span>
+						<span>지점주소</span>
+						<span>지점주소</span>
+						<span>지점주소</span>
+						<span>지점주소</span>
+						<span>지점주소</span>
+						<span>지점주소</span>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -288,6 +349,16 @@
 				}
 			})
 		})
+		
+		var mapContainer2 = document.getElementById('map2'),
+		mapOption2={
+			center:new kakao.maps.LatLng(37.481618, 126.882554),
+			level:3
+		};
+		var map2 = new kakao.maps.Map(mapContainer2, mapOption2);
+		
+		
+		
 	</script>
 </main>
 

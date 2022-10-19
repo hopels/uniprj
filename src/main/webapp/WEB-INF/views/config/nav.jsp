@@ -47,7 +47,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="goMyPage.do">
+              <a class="dropdown-item d-flex align-items-center" href="http://localhost:5080/goMyPage.do">
                 <i class="bi bi-person"></i>
                 <span>마이페이지</span>
               </a>
@@ -58,7 +58,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="logout.do">
+              <a class="dropdown-item d-flex align-items-center" href="http://localhost:5080/logout.do">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>로그아웃</span>
               </a>
@@ -82,40 +82,45 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="MainPage.do">
+        <a class="nav-link collapsed" href="http://localhost:5080/MainPage.do">
           <i class="bi bi-grid"></i>
           <span>메인</span>
         </a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="noticePage.do">
+        <a class="nav-link collapsed" href="http://localhost:5080/noticePage.do">
           <i class="bi bi-megaphone"></i>
           <span>공지사항</span>
         </a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="boardList.do">
+        <a class="nav-link collapsed" href="http://localhost:5080/boardList.do">
           <i class="bi bi-chat-right-text"></i>
           <span>자유게시판</span>
         </a>
       </li>
-      
+
       <li class="nav-item">
-        <a class="nav-link collapsed" href="map.do">
-          <i class="bi bi-map"></i>
-          <span>지점안내</span>
-        </a>
-      </li>
+      	<a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+		<i class="bi bi-menu-button-wide"></i><span>고객지원</span><i class="bi bi-chevron-down ms-auto"></i>
+		</a>
+		<ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+	        <a class="nav-link collapsed" href="http://localhost:5080/center/map.do">
+	          <i class="bi bi-map"></i>
+	          <span>지점안내</span>
+	        </a>
+      	</li>
       
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="boxPage">
-          <i class="bi bi-box"></i>
-          <span>셀렉트박스</span>
-        </a>
-      </li>
-      
+      	<li>
+	        <a class="nav-link collapsed" href="http://localhost:5080/center/boxPage">
+	          <i class="bi bi-box"></i>
+	          <span>셀렉트박스</span>
+	        </a>
+      	</li>
+      </ul>
     </ul>
 
   </aside><!-- End Sidebar-->
